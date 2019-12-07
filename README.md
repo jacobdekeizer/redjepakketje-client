@@ -1,5 +1,9 @@
 # Red je Pakketje api client
 
+[![Latest Stable Version](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/v/stable)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![License](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/license)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+
+
 [Red je Pakketje API documentation](https://redjepakketje.docs.apiary.io)
 
 ## Installation
