@@ -19,7 +19,7 @@ composer require jacobdekeizer/redjepakketje-client
 Create the client
 
 ```php
-$client = new \jacobdekeizer\Client();
+$client = new \JacobDeKeizer\RedJePakketje\Client();
 
 $client->setApiKey('api_key');
 ```
@@ -27,7 +27,7 @@ $client->setApiKey('api_key');
 ### Create shipment
 
 ```php
-$shipment = (new \jacobdekeizer\Resources\Shipment())
+$shipment = (new \JacobDeKeizer\RedJePakketje\Resources\Shipment())
     ->setCompanyName('Boeren BV')
     ->setName('Gijs Boersma')
     ->setStreet('Lange laan')
@@ -41,12 +41,12 @@ $shipment = (new \jacobdekeizer\Resources\Shipment())
     ->setNote('Some note')
     ->setName('My Company')
     ->setDeliveryDate(date('Y-m-d'))
-    ->setProduct(\jacobdekeizer\Resources\Shipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
+    ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\Shipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
     ->setPickUpPoint('pick_up_point_uuid');
 
 $shipmentResponse = $client->shipments()->create(
     $shipment,
-    new \jacobdekeizer\Parameters\Shipments\Create() // optional
+    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\Create() // optional
 );
 
 $label = $shipmentResponse->getLabel();
@@ -56,7 +56,7 @@ $label = $shipmentResponse->getLabel();
 
 ```php
 $shipmentsList = $client->shipments()->all(
-    new \jacobdekeizer\Parameters\Shipments\All() // optional
+    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\All() // optional
 );
 ```
 
@@ -65,7 +65,7 @@ $shipmentsList = $client->shipments()->all(
 ```php
 $shipmentResponse = $client->shipments()->get(
     'your_tracking_code',
-    new \jacobdekeizer\Parameters\Shipments\GetLabel() // optional
+    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel() // optional
 );
 ```
 
@@ -74,14 +74,14 @@ $shipmentResponse = $client->shipments()->get(
 ```php
 $labelContents = $client->shipments()->getLabel(
     'your_tracking_code',
-    new \jacobdekeizer\Parameters\Shipments\GetLabel() // optional
+    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel() // optional
 );
 ```
 
 ### Create return shipments
 
 ```php
-$returnShipment = (new \jacobdekeizer\Resources\ReturnShipment())
+$returnShipment = (new \JacobDeKeizer\RedJePakketje\Resources\ReturnShipment())
     ->setName('Gijs Boersma')
     ->setStreet('Lange laan')
     ->setHouseNumber(29)
@@ -94,7 +94,7 @@ $returnShipment = (new \jacobdekeizer\Resources\ReturnShipment())
     ->setNote('Some note')
     ->setReceiverName('My company')
     ->setPickUpPoint('pick_up_point_uuid')
-    ->setProduct(\jacobdekeizer\Resources\ReturnShipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
+    ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\ReturnShipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
     ->setNote('some text');
 
 $returnShipmentResponse = $client->returns()->create($returnShipment);
@@ -104,7 +104,7 @@ $returnShipmentResponse = $client->returns()->create($returnShipment);
 
 ```php
 $returnShipmentsList = $client->returns()->all(
-    new \jacobdekeizer\Parameters\Returns\All() // optional
+    new \JacobDeKeizer\RedJePakketje\Parameters\Returns\All() // optional
 );
 ```
 
@@ -129,12 +129,12 @@ $pickUpPoint = $client->pickUps()->get('pick_up_point_uuid');
 ### Create contact
 
 ```php
-$contact = (new \jacobdekeizer\Resources\Contact())
+$contact = (new \JacobDeKeizer\RedJePakketje\Resources\Contact())
     ->setFirstName('John')
     ->setLastName('Doe')
     ->setEmail('john.doe@example.com')
     ->setTelephone('+31612345678')
-    ->setGender(\jacobdekeizer\Resources\Contact::GENDER_MALE)
+    ->setGender(\JacobDeKeizer\RedJePakketje\Resources\Contact::GENDER_MALE)
     ->setReference('abcdefg');
 
 $contactResponse = $client->contacts()->create($contact);
@@ -155,13 +155,13 @@ $contact = $client->contacts()->get('3c8a9435-8b68-4d06-847d-4d1cd5f7c27a');
 ### Update contact
 
 ```php
-$contact = (new \jacobdekeizer\Resources\Contact())
+$contact = (new \JacobDeKeizer\RedJePakketje\Resources\Contact())
     ->setUuid('uuid_of_contact')
     ->setFirstName('Jane')
     ->setLastName('Doe')
     ->setEmail('john.doe@example.com')
     ->setTelephone('+31612345678')
-    ->setGender(\jacobdekeizer\Resources\Contact::GENDER_FEMALE)
+    ->setGender(\JacobDeKeizer\RedJePakketje\Resources\Contact::GENDER_FEMALE)
     ->setReference('abcdefg');
 
 $contactResponse = $client->contacts()->update($contact);

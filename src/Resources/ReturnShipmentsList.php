@@ -1,9 +1,9 @@
 <?php
 
-namespace jacobdekeizer\Resources;
+namespace JacobDeKeizer\RedJePakketje\Resources;
 
-use jacobdekeizer\Contracts\Dto;
-use jacobdekeizer\Traits\FromArray;
+use JacobDeKeizer\RedJePakketje\Contracts\Dto;
+use JacobDeKeizer\RedJePakketje\Traits\FromArray;
 
 class ReturnShipmentsList extends BaseList
 {

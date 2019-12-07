@@ -1,11 +1,11 @@
 <?php
 
-namespace jacobdekeizer\Resources;
+namespace JacobDeKeizer\RedJePakketje\Resources;
 
-use jacobdekeizer\Contracts\Dto;
-use jacobdekeizer\Contracts\HasShipmentProduct;
-use jacobdekeizer\Contracts\ToRequest;
-use jacobdekeizer\Traits;
+use JacobDeKeizer\RedJePakketje\Contracts\Dto;
+use JacobDeKeizer\RedJePakketje\Contracts\HasShipmentProduct;
+use JacobDeKeizer\RedJePakketje\Contracts\ToRequest;
+use JacobDeKeizer\RedJePakketje\Traits;
 
 class Shipment implements Dto, ToRequest, HasShipmentProduct
 {

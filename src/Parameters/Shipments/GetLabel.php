@@ -1,12 +1,12 @@
 <?php
 
-namespace jacobdekeizer\Parameters\Shipments;
+namespace JacobDeKeizer\RedJePakketje\Parameters\Shipments;
 
-use jacobdekeizer\Contracts\Dto;
-use jacobdekeizer\Contracts\HasLabelFormat;
-use jacobdekeizer\Contracts\Parameter;
-use jacobdekeizer\Traits\FromArray;
-use jacobdekeizer\Traits\Query;
+use JacobDeKeizer\RedJePakketje\Contracts\Dto;
+use JacobDeKeizer\RedJePakketje\Contracts\HasLabelFormat;
+use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\Traits\FromArray;
+use JacobDeKeizer\RedJePakketje\Traits\Query;
 
 class GetLabel implements Dto, Parameter, HasLabelFormat
 {

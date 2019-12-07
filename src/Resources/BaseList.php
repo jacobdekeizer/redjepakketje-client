@@ -1,8 +1,8 @@
 <?php
 
-namespace jacobdekeizer\Resources;
+namespace JacobDeKeizer\RedJePakketje\Resources;
 
-use jacobdekeizer\Contracts\Dto;
+use JacobDeKeizer\RedJePakketje\Contracts\Dto;
 
 abstract class BaseList implements Dto
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace jacobdekeizer\Endpoints;
+namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
-use jacobdekeizer\Client;
+use JacobDeKeizer\RedJePakketje\Client;
 
 class Base
 {

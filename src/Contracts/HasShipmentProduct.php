@@ -1,6 +1,6 @@
 <?php
 
-namespace jacobdekeizer\Contracts;
+namespace JacobDeKeizer\RedJePakketje\Contracts;
 
 interface HasShipmentProduct
 {

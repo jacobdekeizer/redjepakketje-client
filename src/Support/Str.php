@@ -1,6 +1,6 @@
 <?php
 
-namespace jacobdekeizer\Support;
+namespace JacobDeKeizer\RedJePakketje\Support;
 
 class Str
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace jacobdekeizer\Traits;
+namespace JacobDeKeizer\RedJePakketje\Traits;
 
-use jacobdekeizer\Support\Str;
+use JacobDeKeizer\RedJePakketje\Support\Str;
 
 trait ToRequest
 {

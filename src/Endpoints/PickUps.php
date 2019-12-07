@@ -1,10 +1,10 @@
 <?php
 
-namespace jacobdekeizer\Endpoints;
+namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
-use jacobdekeizer\Exceptions\RedJePakketjeException;
-use jacobdekeizer\Resources\PickUpPoint;
-use jacobdekeizer\Resources\PickUpPointsList;
+use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
+use JacobDeKeizer\RedJePakketje\Resources\PickUpPoint;
+use JacobDeKeizer\RedJePakketje\Resources\PickUpPointsList;
 
 class PickUps extends Base
 {

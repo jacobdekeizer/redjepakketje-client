@@ -1,12 +1,12 @@
 <?php
 
-namespace jacobdekeizer\Endpoints;
+namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
-use jacobdekeizer\Exceptions\RedJePakketjeException;
-use jacobdekeizer\Parameters\Shipments as Parameters;
-use jacobdekeizer\Resources\Shipment;
-use jacobdekeizer\Resources\ShipmentsList;
-use jacobdekeizer\Resources\ShipmentResponse;
+use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
+use JacobDeKeizer\RedJePakketje\Parameters\Shipments as Parameters;
+use JacobDeKeizer\RedJePakketje\Resources\Shipment;
+use JacobDeKeizer\RedJePakketje\Resources\ShipmentsList;
+use JacobDeKeizer\RedJePakketje\Resources\ShipmentResponse;
 
 class Shipments extends Base
 {

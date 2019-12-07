@@ -1,10 +1,10 @@
 <?php
 
-namespace jacobdekeizer\Resources;
+namespace JacobDeKeizer\RedJePakketje\Resources;
 
-use jacobdekeizer\Contracts\Dto;
-use jacobdekeizer\Contracts\ToRequest;
-use jacobdekeizer\Traits;
+use JacobDeKeizer\RedJePakketje\Contracts\Dto;
+use JacobDeKeizer\RedJePakketje\Contracts\ToRequest;
+use JacobDeKeizer\RedJePakketje\Traits;
 
 class PickUpPoint implements Dto, ToRequest
 {

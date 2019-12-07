@@ -1,12 +1,12 @@
 <?php
 
-namespace jacobdekeizer\Endpoints;
+namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
-use jacobdekeizer\Exceptions\RedJePakketjeException;
-use jacobdekeizer\Parameters\Returns as Parameters;
-use jacobdekeizer\Resources\ReturnShipment;
-use jacobdekeizer\Resources\ReturnShipmentResponse;
-use jacobdekeizer\Resources\ReturnShipmentsList;
+use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
+use JacobDeKeizer\RedJePakketje\Parameters\Returns as Parameters;
+use JacobDeKeizer\RedJePakketje\Resources\ReturnShipment;
+use JacobDeKeizer\RedJePakketje\Resources\ReturnShipmentResponse;
+use JacobDeKeizer\RedJePakketje\Resources\ReturnShipmentsList;
 
 class Returns extends Base
 {

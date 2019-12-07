@@ -1,9 +1,9 @@
 <?php
 
-namespace jacobdekeizer\Endpoints;
+namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
-use jacobdekeizer\Exceptions\RedJePakketjeException;
-use jacobdekeizer\Resources\CutOffTime;
+use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
+use JacobDeKeizer\RedJePakketje\Resources\CutOffTime;
 
 class CutOffTimes extends Base
 {

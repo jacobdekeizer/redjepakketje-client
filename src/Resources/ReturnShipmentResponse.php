@@ -1,8 +1,8 @@
 <?php
 
-namespace jacobdekeizer\Resources;
+namespace JacobDeKeizer\RedJePakketje\Resources;
 
-use jacobdekeizer\Traits\FromArray;
+use JacobDeKeizer\RedJePakketje\Traits\FromArray;
 
 class ReturnShipmentResponse extends ShipmentResponse
 {

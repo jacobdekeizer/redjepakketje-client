@@ -1,10 +1,10 @@
 <?php
 
-namespace jacobdekeizer\Endpoints;
+namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
-use jacobdekeizer\Exceptions\RedJePakketjeException;
-use jacobdekeizer\Resources\Contact;
-use jacobdekeizer\Resources\ContactsList;
+use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
+use JacobDeKeizer\RedJePakketje\Resources\Contact;
+use JacobDeKeizer\RedJePakketje\Resources\ContactsList;
 
 class Contacts extends Base
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace jacobdekeizer\Exceptions;
+namespace JacobDeKeizer\RedJePakketje\Exceptions;
 
 use Exception;
 use Throwable;

@@ -1,11 +1,11 @@
 <?php
 
-namespace jacobdekeizer\Parameters\Returns;
+namespace JacobDeKeizer\RedJePakketje\Parameters\Returns;
 
-use jacobdekeizer\Contracts\Dto;
-use jacobdekeizer\Contracts\Parameter;
-use jacobdekeizer\Traits\FromArray;
-use jacobdekeizer\Traits\Query;
+use JacobDeKeizer\RedJePakketje\Contracts\Dto;
+use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\Traits\FromArray;
+use JacobDeKeizer\RedJePakketje\Traits\Query;
 
 class All implements Dto, Parameter
 {

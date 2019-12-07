@@ -1,12 +1,12 @@
 <?php
 
-namespace jacobdekeizer;
+namespace JacobDeKeizer\RedJePakketje;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
-use jacobdekeizer\Endpoints;
-use jacobdekeizer\Exceptions\RedJePakketjeException;
+use JacobDeKeizer\RedJePakketje\Endpoints;
+use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
 use Psr\Http\Message\ResponseInterface;
 
 class Client
