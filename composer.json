@@ -1,5 +1,5 @@
 {
-  "name": "jacobdekeizer/statusweb-client",
+  "name": "jacobdekeizer/redjepakketje-client",
   "type": "library",
   "description": "Red je Pakketje API client for PHP",
   "keywords": ["api", "red je pakketje", "redjepakketje", "client", "php"],
