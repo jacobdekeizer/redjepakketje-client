@@ -162,3 +162,9 @@ $contact = (new \jacobdekeizer\Resources\Contact())
 
 $contactResponse = $client->contacts()->update($contact);
 ```
+
+### Get cut off time
+
+```php
+$cutOffTime = $client->cutOffTimes()->get('1102AB');
+```

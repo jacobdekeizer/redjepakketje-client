@@ -2,10 +2,22 @@
 
 namespace jacobdekeizer\Endpoints;
 
+use jacobdekeizer\Exceptions\RedJePakketjeException;
+use jacobdekeizer\Resources\CutOffTime;
+
 class CutOffTimes extends Base
 {
-    public function get(string $zipCode)
+    /**
+     * @param string $zipCode
+     * @return CutOffTime
+     * @throws RedJePakketjeException
+     */
+    public function get(string $zipCode): CutOffTime
     {
-        // do something
+        $response = $this->client->doRequest('POST', 'cut-off-times', json_encode(['zipcode' => $zipCode]));
+
+        $data = ((array) $response)['data'] ?? [];
+
+        return CutOffTime::fromArray((array) $data);
     }
 }
