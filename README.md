@@ -117,13 +117,13 @@ $returnShipment = $client->returns()->get('return_shipment_uuid');
 ### List pick up points
 
 ```php
-$pickUpPoints = $client->pickUps()->all();
+$pickUpPoints = $client->pickUpPoints()->all();
 ```
 
 ### Get pick up point
 
 ```php
-$pickUpPoint = $client->pickUps()->get('pick_up_point_uuid');
+$pickUpPoint = $client->pickUpPoints()->get('pick_up_point_uuid');
 ```
 
 ### Create contact
@@ -149,7 +149,7 @@ $contacts = $client->contacts()->all();
 ### Get contact
 
 ```php
-$contact = $client->contacts()->get('3c8a9435-8b68-4d06-847d-4d1cd5f7c27a');
+$contact = $client->contacts()->get('contact_uuid');
 ```
 
 ### Update contact

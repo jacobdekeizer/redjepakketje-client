@@ -34,7 +34,7 @@ class Client
     private $cutOffTimes;
 
     /**
-     * @var Endpoints\PickUps
+     * @var Endpoints\PickUpPoints
      */
     private $pickUps;
 
@@ -59,7 +59,7 @@ class Client
 
         $this->contacts = new Endpoints\Contacts($this);
         $this->cutOffTimes = new Endpoints\CutOffTimes($this);
-        $this->pickUps = new Endpoints\PickUps($this);
+        $this->pickUps = new Endpoints\PickUpPoints($this);
         $this->returns = new Endpoints\Returns($this);
         $this->shipments = new Endpoints\Shipments($this);
     }
@@ -166,9 +166,9 @@ class Client
     }
 
     /**
-     * @return Endpoints\PickUps
+     * @return Endpoints\PickUpPoints
      */
-    public function pickUps(): Endpoints\PickUps
+    public function pickUpPoints(): Endpoints\PickUpPoints
     {
         return $this->pickUps;
     }

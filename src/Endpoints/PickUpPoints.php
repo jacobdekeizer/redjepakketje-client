@@ -6,7 +6,7 @@ use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
 use JacobDeKeizer\RedJePakketje\Resources\PickUpPoint;
 use JacobDeKeizer\RedJePakketje\Resources\PickUpPointsList;
 
-class PickUps extends Base
+class PickUpPoints extends Base
 {
     /**
      * @return PickUpPointsList
