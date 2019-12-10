@@ -24,6 +24,8 @@ $client = new \JacobDeKeizer\RedJePakketje\Client();
 $client->setApiKey('api_key');
 ```
 
+> This readme shows basic usage of this package, for all available options see the class definitions and the api documentation.
+
 ### Create shipment
 
 ```php
@@ -39,9 +41,10 @@ $shipment = (new \JacobDeKeizer\RedJePakketje\Resources\Shipment())
     ->setEmail('noreply@example.com')
     ->setReference('Bestelling 112')
     ->setNote('Some note')
-    ->setName('My Company')
     ->setDeliveryDate(date('Y-m-d'))
     ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\Shipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
+    ->setReference('2734690440 | 119')
+    ->setNote('my_note');
     ->setPickUpPoint('pick_up_point_uuid');
 
 $shipmentResponse = $client->shipments()->create(
