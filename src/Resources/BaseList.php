@@ -204,7 +204,7 @@ abstract class BaseList implements Dto
         $this->data = [];
 
         foreach ($data as $shipment) {
-            $this->data[] = ReturnShipmentResponse::fromArray((array) $shipment);
+            $this->data[] = $this->createDataResourceFromArray((array) $shipment);
         }
 
         return $this;
