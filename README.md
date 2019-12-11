@@ -43,7 +43,7 @@ $shipment = (new \JacobDeKeizer\RedJePakketje\Resources\Shipment())
     ->setNote('Some note')
     ->setDeliveryDate(date('Y-m-d'))
     ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\Shipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
-    ->setReference('2734690440 | 119')
+    ->setReference('reference')
     ->setNote('my_note');
     ->setPickUpPoint('pick_up_point_uuid');
 
@@ -138,7 +138,7 @@ $contact = (new \JacobDeKeizer\RedJePakketje\Resources\Contact())
     ->setEmail('john.doe@example.com')
     ->setTelephone('+31612345678')
     ->setGender(\JacobDeKeizer\RedJePakketje\Resources\Contact::GENDER_MALE)
-    ->setReference('abcdefg');
+    ->setReference('reference');
 
 $contactResponse = $client->contacts()->create($contact);
 ```
@@ -165,7 +165,7 @@ $contact = (new \JacobDeKeizer\RedJePakketje\Resources\Contact())
     ->setEmail('john.doe@example.com')
     ->setTelephone('+31612345678')
     ->setGender(\JacobDeKeizer\RedJePakketje\Resources\Contact::GENDER_FEMALE)
-    ->setReference('abcdefg');
+    ->setReference('reference');
 
 $contactResponse = $client->contacts()->update($contact);
 ```
