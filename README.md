@@ -39,12 +39,11 @@ $shipment = (new \JacobDeKeizer\RedJePakketje\Resources\Shipment())
     ->setCity('Zevenaar')
     ->setTelephone('0602938172')
     ->setEmail('noreply@example.com')
-    ->setReference('Bestelling 112')
     ->setNote('Some note')
     ->setDeliveryDate(date('Y-m-d'))
     ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\Shipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
     ->setReference('reference')
-    ->setNote('my_note');
+    ->setNote('my_note')
     ->setPickUpPoint('pick_up_point_uuid');
 
 $shipmentResponse = $client->shipments()->create(
