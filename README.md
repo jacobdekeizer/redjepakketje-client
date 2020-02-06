@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/v/stable)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
 [![License](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/license)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
-
+[![Total Downloads](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/downloads)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
 
 [Red je Pakketje API documentation](https://redjepakketje.docs.apiary.io)
 
@@ -16,6 +16,8 @@ composer require jacobdekeizer/redjepakketje-client
 
 ## Usage
 
+> This readme shows basic usage of this package, for all available options see the class definitions and the api documentation.
+
 Create the client
 
 ```php
@@ -23,8 +25,6 @@ $client = new \JacobDeKeizer\RedJePakketje\Client();
 
 $client->setApiKey('api_key');
 ```
-
-> This readme shows basic usage of this package, for all available options see the class definitions and the api documentation.
 
 ### Create shipment
 
@@ -69,6 +69,9 @@ $shipmentResponse = $client->shipments()->get(
     'your_tracking_code',
     new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel() // optional
 );
+
+// check shipment status
+$isPreTransit = $shipmentResponse->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ShipmentStatus::STATUS_PRE_TRANSIT);
 ```
 
 ### Get label
@@ -114,6 +117,8 @@ $returnShipmentsList = $client->returns()->all(
 
 ```php
 $returnShipment = $client->returns()->get('return_shipment_uuid');
+
+$isPreTransit = $returnShipment->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ReturnShipmentStatus::STATUS_PRE_TRANSIT);
 ```
 
 ### List pick up points

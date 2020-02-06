@@ -365,9 +365,7 @@ class ReturnShipment implements Dto, ToRequest, HasShipmentProduct
             return [
                 'uuid' => $value,
             ];
-        }
-
-        if ($key === 'product_options' && is_array($value)) {
+        } elseif ($key === 'product_options' && is_array($value)) {
             return array_map(static function (ProductOption $productOption) {
                 return $productOption->toRequest();
             }, $value);

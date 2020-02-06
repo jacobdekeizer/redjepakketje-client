@@ -140,11 +140,6 @@ class ShipmentResponse implements Dto
     private $events;
 
     /**
-     * @var
-     */
-    private $returnAttempts;
-
-    /**
      * @return null|string
      */
     public function getTrackingcode(): ?string
@@ -469,6 +464,15 @@ class ShipmentResponse implements Dto
     }
 
     /**
+     * @param string $status
+     * @return bool
+     */
+    public function isStatus(string $status): bool
+    {
+        return $this->status === $status;
+    }
+
+    /**
      * @param null|string $expectedDeliveryDate
      * @return ShipmentResponse
      */
@@ -621,11 +625,11 @@ class ShipmentResponse implements Dto
     {
         if ($key === 'pick_up_point' && $value !== null) {
             return PickUpPoint::fromArray((array) $value);
-        }elseif ($key === 'delivery_attempts' && is_array($value)) {
+        } elseif ($key === 'delivery_attempts' && is_array($value)) {
             return array_map(static function ($data) {
                 return DeliveryAttempt::fromArray((array) $data);
             }, $value);
-        }elseif ($key === 'events' && is_array($value)) {
+        } elseif ($key === 'events' && is_array($value)) {
             return array_map(static function ($data) {
                 return Event::fromArray((array) $data);
             }, $value);
