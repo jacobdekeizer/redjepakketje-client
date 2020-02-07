@@ -1,8 +1,8 @@
 # Red je Pakketje api client
 
-[![Latest Stable Version](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/v/stable)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
-[![License](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/license)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
-[![Total Downloads](https://poser.pugx.org/jacobdekeizer/redjepakketje-client/downloads)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![Packagist Version](https://img.shields.io/packagist/v/jacobdekeizer/redjepakketje-client)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![Packagist](https://img.shields.io/packagist/l/jacobdekeizer/redjepakketje-client?color=brightgreen)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![Packagist](https://img.shields.io/packagist/dt/jacobdekeizer/redjepakketje-client?color=brightgreen)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
 
 [Red je Pakketje API documentation](https://redjepakketje.docs.apiary.io)
 
@@ -118,6 +118,7 @@ $returnShipmentsList = $client->returns()->all(
 ```php
 $returnShipment = $client->returns()->get('return_shipment_uuid');
 
+// for example check the shipment status
 $isPreTransit = $returnShipment->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ReturnShipmentStatus::STATUS_PRE_TRANSIT);
 ```
 
