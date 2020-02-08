@@ -4,12 +4,12 @@ namespace JacobDeKeizer\RedJePakketje\Parameters\Shipments;
 
 use JacobDeKeizer\RedJePakketje\Contracts\Dto;
 use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\QueryParameters\QueryParameterBuilder;
 use JacobDeKeizer\RedJePakketje\Traits\FromArray;
-use JacobDeKeizer\RedJePakketje\Traits\Query;
 
 class All implements Dto, Parameter
 {
-    use FromArray, Query;
+    use FromArray;
 
     /**
      * @var int Number of shipments returned per page (max. 1000)
@@ -182,24 +182,13 @@ class All implements Dto, Parameter
      */
     public function toQuery(): string
     {
-        $query = '';
-
-        $this->addPropertyToQuery($query, 'per_page');
-
-        if ($this->getColumn()) {
-            $raw = '&sort=' . $this->getColumn();
-            if ($this->getDirection()) {
-                $raw .= '|' . $this->getDirection();
-            }
-
-            $this->addRawToQuery($query, $raw);
-        }
-
-        $this->addOptionalPropertyToQuery($query, 'page');
-        $this->addOptionalPropertyToQuery($query, 'search');
-        $this->addOptionalPropertyToQuery($query, 'before');
-        $this->addOptionalPropertyToQuery($query, 'after');
-
-        return $query;
+        return (new QueryParameterBuilder)
+            ->addRequiredParameter('per_page', $this->getPerPage())
+            ->addOptionalParameter('page', $this->getPage())
+            ->addOptionalParameter('search', $this->getSearch())
+            ->addOptionalParameter('before', $this->getBefore())
+            ->addOptionalParameter('after', $this->getAfter())
+            ->addSortQueryParameter('sort', $this->getColumn(), $this->getDirection())
+            ->toQueryString();
     }
 }

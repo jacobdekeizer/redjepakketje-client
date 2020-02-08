@@ -70,7 +70,7 @@ $shipmentResponse = $client->shipments()->get(
     new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel() // optional
 );
 
-// check shipment status
+// for example check the shipment status
 $isPreTransit = $shipmentResponse->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ShipmentStatus::STATUS_PRE_TRANSIT);
 ```
 
@@ -118,7 +118,7 @@ $returnShipmentsList = $client->returns()->all(
 ```php
 $returnShipment = $client->returns()->get('return_shipment_uuid');
 
-// for example check the shipment status
+// for example check the return shipment status
 $isPreTransit = $returnShipment->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ReturnShipmentStatus::STATUS_PRE_TRANSIT);
 ```
 

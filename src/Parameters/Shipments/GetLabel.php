@@ -5,12 +5,12 @@ namespace JacobDeKeizer\RedJePakketje\Parameters\Shipments;
 use JacobDeKeizer\RedJePakketje\Contracts\Dto;
 use JacobDeKeizer\RedJePakketje\Contracts\HasLabelFormat;
 use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\QueryParameters\QueryParameterBuilder;
 use JacobDeKeizer\RedJePakketje\Traits\FromArray;
-use JacobDeKeizer\RedJePakketje\Traits\Query;
 
 class GetLabel implements Dto, Parameter, HasLabelFormat
 {
-    use FromArray, Query;
+    use FromArray;
 
     /**
      * @var string
@@ -20,7 +20,7 @@ class GetLabel implements Dto, Parameter, HasLabelFormat
     /**
      * @var string
      */
-    private $pagesize;
+    private $pageSize;
 
     /**
      * @var int|null
@@ -50,7 +50,7 @@ class GetLabel implements Dto, Parameter, HasLabelFormat
     public function __construct()
     {
         $this->format = self::LABEL_TYPE_PDF;
-        $this->pagesize = self::LABEL_SIZE_A6;
+        $this->pageSize = self::LABEL_SIZE_A6;
     }
 
     /**
@@ -72,21 +72,21 @@ class GetLabel implements Dto, Parameter, HasLabelFormat
     }
 
     /**
-     * @param string $pagesize
+     * @param string $pageSize
      * @return GetLabel
      */
-    public function setPagesize(string $pagesize): GetLabel
+    public function setPageSize(string $pageSize): GetLabel
     {
-        $this->pagesize = $pagesize;
+        $this->pageSize = $pageSize;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getPagesize(): string
+    public function getPageSize(): string
     {
-        return $this->pagesize;
+        return $this->pageSize;
     }
 
     /**
@@ -184,16 +184,14 @@ class GetLabel implements Dto, Parameter, HasLabelFormat
      */
     public function toQuery(): string
     {
-        $query = '';
-
-        $this->addPropertyToQuery($query, 'format');
-        $this->addPropertyToQuery($query, 'pagesize');
-        $this->addOptionalPropertyToQuery($query, 'offset_x');
-        $this->addOptionalPropertyToQuery($query, 'offset_y');
-        $this->addOptionalPropertyToQuery($query, 'dpi');
-        $this->addOptionalPropertyToQuery($query, 'embedded');
-        $this->addOptionalPropertyToQuery($query, 'inverted');
-
-        return $query;
+        return (new QueryParameterBuilder)
+            ->addRequiredParameter('format', $this->getFormat())
+            ->addRequiredParameter('pagesize', $this->getPageSize())
+            ->addOptionalParameter('offset_x', $this->getOffsetX())
+            ->addOptionalParameter('offset_y', $this->getOffsetY())
+            ->addOptionalParameter('dpi', $this->getDpi())
+            ->addOptionalParameter('embedded', $this->getEmbedded())
+            ->addOptionalParameter('inverted', $this->getInverted())
+            ->toQueryString();
     }
 }

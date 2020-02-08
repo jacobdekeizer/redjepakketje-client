@@ -4,12 +4,12 @@ namespace JacobDeKeizer\RedJePakketje\Parameters\Returns;
 
 use JacobDeKeizer\RedJePakketje\Contracts\Dto;
 use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\QueryParameters\QueryParameterBuilder;
 use JacobDeKeizer\RedJePakketje\Traits\FromArray;
-use JacobDeKeizer\RedJePakketje\Traits\Query;
 
 class All implements Dto, Parameter
 {
-    use FromArray, Query;
+    use FromArray;
 
     /**
      * @var int|null
@@ -154,15 +154,13 @@ class All implements Dto, Parameter
      */
     public function toQuery(): string
     {
-        $query = '';
-
-        $this->addOptionalPropertyToQuery($query, 'per_page');
-        $this->addOptionalPropertyToQuery($query, 'page');
-        $this->addOptionalPropertyToQuery($query, 'pickup_before');
-        $this->addOptionalPropertyToQuery($query, 'pickup_after');
-        $this->addOptionalPropertyToQuery($query, 'delivery_before');
-        $this->addOptionalPropertyToQuery($query, 'delivery_after');
-
-        return $query;
+        return (new QueryParameterBuilder)
+            ->addOptionalParameter('per_page', $this->getPerPage())
+            ->addOptionalParameter('page', $this->getPage())
+            ->addOptionalParameter('pickup_before', $this->getPickupBefore())
+            ->addOptionalParameter('pickup_after', $this->getPickupAfter())
+            ->addOptionalParameter('delivery_before', $this->getDeliveryBefore())
+            ->addOptionalParameter('delivery_after', $this->getDeliveryAfter())
+            ->toQueryString();
     }
 }
