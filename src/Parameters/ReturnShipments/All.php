@@ -1,6 +1,6 @@
 <?php
 
-namespace JacobDeKeizer\RedJePakketje\Parameters\Returns;
+namespace JacobDeKeizer\RedJePakketje\Parameters\ReturnShipments;
 
 use JacobDeKeizer\RedJePakketje\Contracts\Dto;
 use JacobDeKeizer\RedJePakketje\Contracts\Parameter;

@@ -3,12 +3,12 @@
 namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
 use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
-use JacobDeKeizer\RedJePakketje\Parameters\Returns as Parameters;
+use JacobDeKeizer\RedJePakketje\Parameters\ReturnShipments as Parameters;
 use JacobDeKeizer\RedJePakketje\Resources\ReturnShipment;
 use JacobDeKeizer\RedJePakketje\Resources\ReturnShipmentResponse;
 use JacobDeKeizer\RedJePakketje\Resources\ReturnShipmentsList;
 
-class Returns extends Base
+class ReturnShipments extends Base
 {
     /**
      * @param Parameters\All|null $parameter

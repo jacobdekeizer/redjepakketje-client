@@ -102,21 +102,21 @@ $returnShipment = (new \JacobDeKeizer\RedJePakketje\Resources\ReturnShipment())
     ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\ReturnShipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
     ->setNote('some text');
 
-$returnShipmentResponse = $client->returns()->create($returnShipment);
+$returnShipmentResponse = $client->returnShipments()->create($returnShipment);
 ```
 
 ### List return shipments
 
 ```php
-$returnShipmentsList = $client->returns()->all(
-    new \JacobDeKeizer\RedJePakketje\Parameters\Returns\All() // optional
+$returnShipmentsList = $client->returnShipments()->all(
+    new \JacobDeKeizer\RedJePakketje\Parameters\ReturnShipments\All() // optional
 );
 ```
 
 ### Get return shipment
 
 ```php
-$returnShipment = $client->returns()->get('return_shipment_uuid');
+$returnShipment = $client->returnShipments()->get('return_shipment_uuid');
 
 // for example check the return shipment status
 $isPreTransit = $returnShipment->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ReturnShipmentStatus::STATUS_PRE_TRANSIT);
