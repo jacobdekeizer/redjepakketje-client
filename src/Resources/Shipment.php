@@ -390,14 +390,7 @@ class Shipment implements Dto, ToRequest, HasShipmentProduct
             ];
         } elseif ($key === 'product_options' && is_array($value)) {
             return array_map(static function (ProductOption $productOption) {
-                if ($productOption->toRequest()['option'] === ProductOption::OPTION_PERISHABLE) {
-                    return $productOption->toRequest();
-                } else {
-                    $requestArray = $productOption->toRequest();
-                    unset($requestArray['max_attempts']);
-
-                    return $requestArray;
-                }
+                return $productOption->toRequest();
             }, $value);
         }
 
