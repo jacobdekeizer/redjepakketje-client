@@ -55,7 +55,7 @@ $label = $shipmentResponse->getLabel();
 ```
 
 ### Adding ProductOptions to a Shipment
-```
+```php
 $shipment = new Shipment();
 $productOptions = [
     (new ProductOption())->setOption(ProductOption::OPTION_ALLOW_NEIGHBOURS)->setValue(true),
