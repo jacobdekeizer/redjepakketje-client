@@ -54,6 +54,19 @@ $shipmentResponse = $client->shipments()->create(
 $label = $shipmentResponse->getLabel();
 ```
 
+### Adding ProductOptions to a Shipment
+```
+$shipment = new Shipment();
+$productOptions = [
+    (new ProductOption())->setOption(ProductOption::OPTION_ALLOW_NEIGHBOURS)->setValue(true),
+    (new ProductOption())->setOption(ProductOption::OPTION_REQUIRE_SIGNATURE)->setValue(false),
+    (new ProductOption())->setOption(ProductOption::OPTION_AGE_CHECK_18)->setValue(false),
+    (new ProductOption())->setOption(ProductOption::OPTION_PERISHABLE)->setValue(true)->setMaxAttempts(2),
+];
+
+$shipment->setProductOptions($productOptions);
+```
+
 ### List shipments
 
 ```php
