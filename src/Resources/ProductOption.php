@@ -86,14 +86,14 @@ class ProductOption implements Dto, ToRequest
     
     
     /**
-     * @param string $key
-     * @return bool
+     * {@inheritDoc}
      */
-    public function removeFromRequestData(string $key)
+    public function removeFromRequestData(string $key): bool
     {
         if ($key === 'max_attempts' && $this->getOption() !== self::OPTION_PERISHABLE) {
             return true;
         }
+
         return false;
     }
 }

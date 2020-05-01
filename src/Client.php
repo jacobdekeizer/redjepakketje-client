@@ -72,8 +72,12 @@ class Client
      * @return string|object|null
      * @throws RedJePakketjeException
      */
-    public function doRequest(string $httpMethod, string $apiRoute, ?string $httpBody = null, array $requestHeaders = [])
-    {
+    public function doRequest(
+        string $httpMethod,
+        string $apiRoute,
+        ?string $httpBody = null,
+        array $requestHeaders = []
+    ) {
         $url = self::BASE_ENDPOINT . '/' . $apiRoute;
 
         $response = $this->doRawRequest($httpMethod, $url, $httpBody, $requestHeaders);
@@ -91,10 +95,10 @@ class Client
         }
 
         if ($response->getStatusCode() >= 400) {
-           throw new RedJePakketjeException(
-               'Error executing api call: ' . $object->error_message . ', StatusCode: ' . $response->getStatusCode(),
-               $response->getStatusCode()
-           );
+            throw new RedJePakketjeException(
+                'Error executing api call: ' . $object->error_message . ', StatusCode: ' . $response->getStatusCode(),
+                $response->getStatusCode()
+            );
         }
 
         return $object;
@@ -108,8 +112,12 @@ class Client
      * @return ResponseInterface|null
      * @throws RedJePakketjeException
      */
-    public function doRawRequest(string $httpMethod, string $url, ?string $httpBody = null, array $requestHeaders = []): ?ResponseInterface
-    {
+    public function doRawRequest(
+        string $httpMethod,
+        string $url,
+        ?string $httpBody = null,
+        array $requestHeaders = []
+    ): ?ResponseInterface {
         $requestHeaders = array_merge($requestHeaders, [
             'Authorization' => ['Basic ' . $this->getEncodedApiKey()],
             'Accept' => 'application/json'

@@ -38,7 +38,7 @@ trait ToRequest
      * @param string $key
      * @return bool
      */
-    protected function removeFromRequestData(string $key)
+    protected function removeFromRequestData(string $key): bool
     {
         return false;
     }

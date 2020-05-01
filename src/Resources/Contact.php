@@ -175,10 +175,9 @@ class Contact implements Dto, ToRequest
     }
 
     /**
-     * @param string $key
-     * @return bool
+     * {@inheritDoc}
      */
-    protected function removeFromRequestData(string $key)
+    protected function removeFromRequestData(string $key): bool
     {
         if ($key === 'uuid') {
             return true;

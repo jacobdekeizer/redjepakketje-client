@@ -39,8 +39,11 @@ class QueryParameterBuilder implements QueryParameter
      * @param string|null $direction
      * @return QueryParameterBuilder
      */
-    public function addSortQueryParameter(string $parameter, ?string $column = null, ?string $direction = null): QueryParameterBuilder
-    {
+    public function addSortQueryParameter(
+        string $parameter,
+        ?string $column = null,
+        ?string $direction = null
+    ): QueryParameterBuilder {
         $this->parameters[] = new QueryParameterSort($parameter, $column, $direction);
         return $this;
     }

@@ -54,17 +54,14 @@ $shipmentResponse = $client->shipments()->create(
 $label = $shipmentResponse->getLabel();
 ```
 
-### Adding ProductOptions to a Shipment
+### Adding product ioptions to a shipment
 ```php
-$shipment = new Shipment();
-$productOptions = [
+$shipment->setProductOptions([
     (new ProductOption())->setOption(ProductOption::OPTION_ALLOW_NEIGHBOURS)->setValue(true),
     (new ProductOption())->setOption(ProductOption::OPTION_REQUIRE_SIGNATURE)->setValue(false),
     (new ProductOption())->setOption(ProductOption::OPTION_AGE_CHECK_18)->setValue(false),
     (new ProductOption())->setOption(ProductOption::OPTION_PERISHABLE)->setValue(true)->setMaxAttempts(2),
-];
-
-$shipment->setProductOptions($productOptions);
+]);
 ```
 
 ### List shipments
@@ -193,3 +190,17 @@ $contactResponse = $client->contacts()->update($contact);
 ```php
 $cutOffTime = $client->cutOffTimes()->get('1102AB');
 ```
+
+## Code sniffer
+
+#### Unix
+
+Check: `./vendor/bin/phpcs --standard=PSR2 ./src`
+
+Autofix: `./vendor/bin/phpcbf --standard=PSR2 ./src`
+
+#### Windows
+
+Check: `.\vendor\bin\phpcs --standard=PSR2 ./src`
+
+Autofix: `.\vendor\bin\phpcbf --standard=PSR2 ./src`

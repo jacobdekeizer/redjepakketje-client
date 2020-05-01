@@ -1,0 +1,19 @@
+name: Build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Validate composer.json and composer.lock 🔎
+        run: composer validate
+
+      - name: Install dependencies 🔧
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Code sniffer 🔎
+        run: ./vendor/bin/phpcs --standard=PSR2 ./src
