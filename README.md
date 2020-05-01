@@ -55,7 +55,7 @@ $shipmentResponse = $client->shipments()->create(
 $label = $shipmentResponse->getLabel();
 ```
 
-### Adding product ioptions to a shipment
+### Adding product options to a shipment
 ```php
 $shipment->setProductOptions([
     (new ProductOption())->setOption(ProductOption::OPTION_ALLOW_NEIGHBOURS)->setValue(true),
