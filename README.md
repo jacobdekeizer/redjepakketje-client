@@ -3,6 +3,7 @@
 [![Packagist Version](https://img.shields.io/packagist/v/jacobdekeizer/redjepakketje-client)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
 [![Packagist](https://img.shields.io/packagist/l/jacobdekeizer/redjepakketje-client?color=brightgreen)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
 [![Packagist](https://img.shields.io/packagist/dt/jacobdekeizer/redjepakketje-client?color=brightgreen)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+![Build](https://github.com/jacobdekeizer/redjepakketje-client/workflows/Build/badge.svg?branch=master)
 
 [Red je Pakketje API documentation](https://redjepakketje.docs.apiary.io)
 
