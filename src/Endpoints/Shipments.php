@@ -64,6 +64,28 @@ class Shipments extends Base
 
         return ShipmentResponse::fromArray((array) $data);
     }
+    
+    /**
+     * @param Shipment|string $trackingCode
+     * @return ShipmentResponse
+     * @throws RedJePakketjeException
+     */
+    public function cancel($trackingCode): ShipmentResponse
+    {
+        $apiRoute = $this->client::BASE_ENDPOINT . '/shipments/' . $trackingCode . '/cancel';
+
+        $response = $this->client->doRawRequest('POST', $apiRoute);
+
+        if ($response->getStatusCode() >= 400) {
+            throw new RedJePakketjeException(
+                'Error executing api call, StatusCode: ' . $response->getStatusCode(),
+                $response->getStatusCode()
+            );
+        }
+        $data = ((array) $response)['data'] ?? [];
+
+        return ShipmentResponse::fromArray((array) $data);
+    }
 
     /**
      * @param string $trackingCode
