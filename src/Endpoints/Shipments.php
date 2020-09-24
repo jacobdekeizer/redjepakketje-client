@@ -23,9 +23,9 @@ class Shipments extends Base
 
         $apiRoute = 'shipments' . $parameter->toQuery();
 
-        $data = $this->client->doRequest('GET', $apiRoute);
+        $response = $this->client->doRequest('GET', $apiRoute);
 
-        return ShipmentsList::fromArray((array) $data);
+        return ShipmentsList::fromArray($response);
     }
 
     /**
@@ -39,9 +39,7 @@ class Shipments extends Base
 
         $response = $this->client->doRequest('GET', $apiRoute);
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return ShipmentResponse::fromArray((array) $data);
+        return ShipmentResponse::fromArray($response['data']);
     }
 
     /**
@@ -60,9 +58,7 @@ class Shipments extends Base
 
         $response = $this->client->doRequest('POST', $apiRoute, json_encode($shipment->toRequest()));
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return ShipmentResponse::fromArray((array) $data);
+        return ShipmentResponse::fromArray($response['data'] ?? []);
     }
 
     /**

@@ -42,8 +42,8 @@ abstract class BaseSimpleList implements Dto
     {
         $this->data = [];
 
-        foreach ($data as $pickUpPoint) {
-            $this->data[] = $this->createDataResourceFromArray((array) $pickUpPoint);
+        foreach ($data as $item) {
+            $this->data[] = $this->createDataResourceFromArray($item);
         }
 
         return $this;

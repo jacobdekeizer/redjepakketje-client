@@ -389,7 +389,7 @@ class Shipment implements Dto, ToRequest, HasShipmentProduct
                 'uuid' => $value,
             ];
         } elseif ($key === 'product_options' && is_array($value)) {
-            return array_map(static function (ProductOption $productOption) {
+            return array_map(static function (ProductOption $productOption): array {
                 return $productOption->toRequest();
             }, $value);
         }

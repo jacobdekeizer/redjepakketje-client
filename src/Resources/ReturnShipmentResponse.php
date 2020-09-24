@@ -62,8 +62,8 @@ class ReturnShipmentResponse extends ShipmentResponse
     protected function convertFromData(string $key, $value)
     {
         if ($key === 'return_attempts' && is_array($value)) {
-            return array_map(static function ($data) {
-                return ReturnAttempt::fromArray((array) $data);
+            return array_map(static function (array $data): ReturnAttempt {
+                return ReturnAttempt::fromArray($data);
             }, $value);
         }
 

@@ -14,6 +14,6 @@ class ReturnShipmentsList extends BaseList
      */
     protected function createDataResourceFromArray(array $data): Dto
     {
-        return ReturnShipmentResponse::fromArray((array) $data);
+        return ReturnShipmentResponse::fromArray($data);
     }
 }

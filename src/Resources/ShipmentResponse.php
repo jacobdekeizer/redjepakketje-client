@@ -624,14 +624,14 @@ class ShipmentResponse implements Dto
     protected function convertFromData(string $key, $value)
     {
         if ($key === 'pick_up_point' && $value !== null) {
-            return PickUpPoint::fromArray((array) $value);
+            return PickUpPoint::fromArray($value);
         } elseif ($key === 'delivery_attempts' && is_array($value)) {
-            return array_map(static function ($data) {
-                return DeliveryAttempt::fromArray((array) $data);
+            return array_map(static function ($data): DeliveryAttempt {
+                return DeliveryAttempt::fromArray($data);
             }, $value);
         } elseif ($key === 'events' && is_array($value)) {
-            return array_map(static function ($data) {
-                return Event::fromArray((array) $data);
+            return array_map(static function ($data): Event {
+                return Event::fromArray($data);
             }, $value);
         }
 

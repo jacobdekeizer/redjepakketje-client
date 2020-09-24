@@ -69,7 +69,7 @@ class Client
      * @param string $apiRoute
      * @param null|string $httpBody
      * @param array $requestHeaders
-     * @return string|object|null
+     * @return array
      * @throws RedJePakketjeException
      */
     public function doRequest(
@@ -77,7 +77,7 @@ class Client
         string $apiRoute,
         ?string $httpBody = null,
         array $requestHeaders = []
-    ) {
+    ): array {
         $url = self::BASE_ENDPOINT . '/' . $apiRoute;
 
         $response = $this->doRawRequest($httpMethod, $url, $httpBody, $requestHeaders);
@@ -88,7 +88,7 @@ class Client
 
         $body = $response->getBody()->getContents();
 
-        $object = @json_decode($body);
+        $data = @json_decode($body, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new RedJePakketjeException('Unable to decode api response: ' . $body);
@@ -96,12 +96,12 @@ class Client
 
         if ($response->getStatusCode() >= 400) {
             throw new RedJePakketjeException(
-                'Error executing api call: ' . $object->error_message . ', StatusCode: ' . $response->getStatusCode(),
+                'Error executing api call: ' . ($data['error_message'] ?? '') . ', StatusCode: ' . $response->getStatusCode(),
                 $response->getStatusCode()
             );
         }
 
-        return $object;
+        return $data;
     }
 
     /**
