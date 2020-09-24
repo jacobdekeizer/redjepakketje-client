@@ -96,7 +96,8 @@ class Client
 
         if ($response->getStatusCode() >= 400) {
             throw new RedJePakketjeException(
-                'Error executing api call: ' . ($data['error_message'] ?? '') . ', StatusCode: ' . $response->getStatusCode(),
+                'Error executing api call: ' . ($data['error_message'] ?? '')
+                    . ', StatusCode: ' . $response->getStatusCode(),
                 $response->getStatusCode()
             );
         }
