@@ -14,9 +14,9 @@ class PickUpPoints extends Base
      */
     public function all(): PickUpPointsList
     {
-        $data = $this->client->doRequest('GET', 'pick-up-points');
+        $response = $this->client->doRequest('GET', 'pick-up-points');
 
-        return PickUpPointsList::fromArray((array) $data);
+        return PickUpPointsList::fromArray($response);
     }
 
     /**
@@ -30,8 +30,6 @@ class PickUpPoints extends Base
 
         $response = $this->client->doRequest('GET', $apiRoute);
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return PickUpPoint::fromArray((array) $data);
+        return PickUpPoint::fromArray($response['data']);
     }
 }

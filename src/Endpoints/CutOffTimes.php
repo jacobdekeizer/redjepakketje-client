@@ -16,8 +16,6 @@ class CutOffTimes extends Base
     {
         $response = $this->client->doRequest('POST', 'cut-off-times', json_encode(['zipcode' => $zipCode]));
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return CutOffTime::fromArray((array) $data);
+        return CutOffTime::fromArray($response['data'] ?? []);
     }
 }

@@ -317,7 +317,7 @@ class PickUpPoint implements Dto, ToRequest
     protected function convertFromData(string $key, $value)
     {
         if ($key === 'contact' && $value !== null) {
-            return Contact::fromArray((array) $value);
+            return Contact::fromArray($value);
         }
 
         return $value;

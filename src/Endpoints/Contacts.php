@@ -14,9 +14,9 @@ class Contacts extends Base
      */
     public function all(): ContactsList
     {
-        $data = $this->client->doRequest('GET', 'contacts');
+        $response = $this->client->doRequest('GET', 'contacts');
 
-        return ContactsList::fromArray((array) $data);
+        return ContactsList::fromArray($response);
     }
 
     /**
@@ -28,9 +28,7 @@ class Contacts extends Base
     {
         $response = $this->client->doRequest('POST', 'contacts', json_encode($contact->toRequest()));
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return Contact::fromArray((array) $data);
+        return Contact::fromArray($response['data'] ?? []);
     }
 
     /**
@@ -44,9 +42,7 @@ class Contacts extends Base
 
         $response = $this->client->doRequest('GET', $apiRoute);
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return Contact::fromArray((array) $data);
+        return Contact::fromArray($response['data']);
     }
 
     /**
@@ -60,8 +56,6 @@ class Contacts extends Base
 
         $response = $this->client->doRequest('POST', $apiRoute, json_encode($contact->toRequest()));
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return Contact::fromArray((array) $data);
+        return Contact::fromArray($response['data'] ?? []);
     }
 }

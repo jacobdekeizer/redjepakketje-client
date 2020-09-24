@@ -19,9 +19,9 @@ class ReturnShipments extends Base
     {
         $apiRoute = 'shipments' . ($parameter ? $parameter->toQuery() : null);
 
-        $data = $this->client->doRequest('GET', $apiRoute);
+        $response = $this->client->doRequest('GET', $apiRoute);
 
-        return ReturnShipmentsList::fromArray((array) $data);
+        return ReturnShipmentsList::fromArray($response);
     }
 
     /**
@@ -35,9 +35,7 @@ class ReturnShipments extends Base
 
         $response = $this->client->doRequest('GET', $apiRoute);
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return ReturnShipmentResponse::fromArray((array) $data);
+        return ReturnShipmentResponse::fromArray($response['data'] ?? []);
     }
 
     /**
@@ -49,8 +47,6 @@ class ReturnShipments extends Base
     {
         $response = $this->client->doRequest('POST', 'return-shipments', json_encode($returnShipment->toRequest()));
 
-        $data = ((array) $response)['data'] ?? [];
-
-        return ReturnShipmentResponse::fromArray((array) $data);
+        return ReturnShipmentResponse::fromArray($response['data'] ?? []);
     }
 }
