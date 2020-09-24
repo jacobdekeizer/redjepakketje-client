@@ -85,6 +85,12 @@ $shipmentResponse = $client->shipments()->get(
 $isPreTransit = $shipmentResponse->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ShipmentStatus::STATUS_PRE_TRANSIT);
 ```
 
+### Cancel shipment
+
+```php
+$shipmentResponse = $client->shipments()->cancel('your_tracking_code');
+```
+
 ### Get label
 
 ```php
