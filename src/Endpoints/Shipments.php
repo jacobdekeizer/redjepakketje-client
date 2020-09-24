@@ -63,6 +63,20 @@ class Shipments extends Base
 
     /**
      * @param string $trackingCode
+     * @return ShipmentResponse
+     * @throws RedJePakketjeException
+     */
+    public function cancel(string $trackingCode): ShipmentResponse
+    {
+        $apiRoute = 'shipments/' . $trackingCode . '/cancel';
+
+        $response = $this->client->doRequest('POST', $apiRoute);
+
+        return ShipmentResponse::fromArray($response['data'] ?? []);
+    }
+
+    /**
+     * @param string $trackingCode
      * @param Parameters\GetLabel|null $parameter
      * @return string
      * @throws RedJePakketjeException
