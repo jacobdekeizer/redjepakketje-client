@@ -6,12 +6,9 @@ namespace JacobDeKeizer\RedJePakketje\Parameters\Shipments;
 
 use JacobDeKeizer\RedJePakketje\Parameters\BaseParameter;
 use JacobDeKeizer\RedJePakketje\QueryParameters\QueryParameterBuilder;
-use JacobDeKeizer\RedJePakketje\Traits\FromArray;
 
 class All extends BaseParameter
 {
-    use FromArray;
-
     private int $perPage = 100;
 
     private ?string $column = null;
@@ -25,11 +22,6 @@ class All extends BaseParameter
     private ?string $before = null;
 
     private ?string $after = null;
-
-    public static function fromArray(array $data): static
-    {
-        return self::createFromArray($data);
-    }
 
     public function setPerPage(int $perPage): static
     {

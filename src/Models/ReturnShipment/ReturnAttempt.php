@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace JacobDeKeizer\RedJePakketje\Models\ReturnShipment;
 
-use JacobDeKeizer\RedJePakketje\Contracts\Model;
-use JacobDeKeizer\RedJePakketje\Traits\FromArray;
+use JacobDeKeizer\RedJePakketje\Models\BaseModel;
 
-class ReturnAttempt implements Model
+class ReturnAttempt extends BaseModel
 {
-    use FromArray;
-
     private string $datetime;
 
     private ?string $receiverSignature;
@@ -20,11 +17,6 @@ class ReturnAttempt implements Model
     private string $statusText;
 
     private string $status;
-
-    public static function fromArray(array $data): static
-    {
-        return self::createFromArray($data);
-    }
 
     public function setDatetime(string $datetime): static
     {
