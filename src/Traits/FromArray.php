@@ -30,14 +30,7 @@ trait FromArray
         foreach ($data as $key => $value) {
             $setMethod = 'set' . Str::studly($key);
 
-//            if ($setMethod === 'setProductoptions') {
-//                var_dump(static::class, method_exists($instance, $setMethod));
-//                die();
-//            }
-
             if (!method_exists($instance, $setMethod)) {
-                var_dump(static::class, $setMethod);
-                die();
                 continue;
             }
 
@@ -69,16 +62,7 @@ trait FromArray
                 continue;
             }
 
-//            if ($setMethod === 'setProductOptions') {
-//                var_dump($setMethod, $isNullable, $reflectionParameter);
-//                die();
-//            }
-
-            try {
-                $isVariadic ? $instance->$setMethod(...$value) : $instance->$setMethod($value);
-            } catch (\Throwable $e) {
-                var_dump($e->getMessage(), $isVariadic, $isNullable, $reflectionParameter);
-            }
+            $isVariadic ? $instance->$setMethod(...$value) : $instance->$setMethod($value);
         }
 
         return $instance;
