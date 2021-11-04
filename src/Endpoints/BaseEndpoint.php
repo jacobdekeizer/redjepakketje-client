@@ -11,7 +11,7 @@ use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
 
-class BaseEndpoint
+abstract class BaseEndpoint
 {
     protected const GET = 'GET';
     protected const POST = 'POST';
