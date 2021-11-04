@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\Enums;
 
-class ReturnShipmentStatus
+interface ReturnShipmentStatus
 {
     public const STATUS_PRE_TRANSIT = 'pre_transit';
     public const STATUS_WAITING_FOR_PICKUP = 'waiting_for_pickup';

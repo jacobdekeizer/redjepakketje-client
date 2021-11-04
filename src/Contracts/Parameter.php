@@ -1,11 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\Contracts;
 
 interface Parameter
 {
-    /**
-     * @return string
-     */
     public function toQuery(): string;
 }

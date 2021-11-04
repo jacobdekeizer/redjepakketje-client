@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\QueryParameters;
 
 use JacobDeKeizer\RedJePakketje\Contracts\QueryParameter;
@@ -9,48 +11,26 @@ class QueryParameterBuilder implements QueryParameter
     /**
      * @var QueryParameter[]
      */
-    private $parameters = [];
+    private array $parameters = [];
 
-    /**
-     * @param string $parameter
-     * @param string|int|bool|null $value
-     * @return QueryParameterBuilder
-     */
-    public function addOptionalParameter(string $parameter, $value): QueryParameterBuilder
+    public function addOptionalParameter(string $parameter, string|int|bool|null $value): static
     {
         $this->parameters[] = new QueryParameterOptional($parameter, $value);
         return $this;
     }
 
-    /**
-     * @param string $parameter
-     * @param string|int|bool $value
-     * @return QueryParameterBuilder
-     */
-    public function addRequiredParameter(string $parameter, $value): QueryParameterBuilder
+    public function addRequiredParameter(string $parameter, string|int|bool $value): static
     {
         $this->parameters[] = new QueryParameterRequired($parameter, $value);
         return $this;
     }
 
-    /**
-     * @param string $parameter
-     * @param string|null $column
-     * @param string|null $direction
-     * @return QueryParameterBuilder
-     */
-    public function addSortQueryParameter(
-        string $parameter,
-        ?string $column = null,
-        ?string $direction = null
-    ): QueryParameterBuilder {
+    public function addSortQueryParameter(string $parameter, ?string $column = null, ?string $direction = null): static
+    {
         $this->parameters[] = new QueryParameterSort($parameter, $column, $direction);
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function toQueryString(): ?string
     {
         $queryString = '';
@@ -66,11 +46,6 @@ class QueryParameterBuilder implements QueryParameter
         return $queryString;
     }
 
-    /**
-     * @param string $queryString
-     * @param string $queryStringToAdd
-     * @return string
-     */
     private function appendToQueryString(string $queryString, string $queryStringToAdd): string
     {
         if ($queryStringToAdd === '') {

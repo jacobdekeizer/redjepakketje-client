@@ -1,42 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\QueryParameters;
 
 use JacobDeKeizer\RedJePakketje\Contracts\QueryParameter;
 
 class QueryParameterOptional implements QueryParameter
 {
-    /**
-     * @var string $parameter
-     */
-    private $parameter;
+    private string $parameter;
 
-    /**
-     * @var mixed
-     */
-    private $value;
+    private string|int|bool|null $value;
 
-    /**
-     * @var string $parameter
-     * @var mixed $value
-     */
-    public function __construct(string $parameter, $value)
+    public function __construct(string $parameter, string|int|bool|null $value)
     {
         $this->parameter = $parameter;
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
     public function getParameter(): string
     {
         return $this->parameter;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValue(): ?string
     {
         if ($this->value === null) {
@@ -50,15 +36,12 @@ class QueryParameterOptional implements QueryParameter
         return (string) $this->value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function toQueryString(): ?string
     {
         if ($this->getValue() === null) {
             return null;
         }
 
-        return $this->getParameter() . '=' . $this->getValue();
+        return $this->getParameter() . '=' . urlencode($this->getValue());
     }
 }

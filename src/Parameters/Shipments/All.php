@@ -1,188 +1,116 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\Parameters\Shipments;
 
-use JacobDeKeizer\RedJePakketje\Contracts\Dto;
-use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\Parameters\BaseParameter;
 use JacobDeKeizer\RedJePakketje\QueryParameters\QueryParameterBuilder;
 use JacobDeKeizer\RedJePakketje\Traits\FromArray;
 
-class All implements Dto, Parameter
+class All extends BaseParameter
 {
     use FromArray;
 
-    /**
-     * @var int Number of shipments returned per page (max. 1000)
-     */
-    private $perPage;
+    private int $perPage = 100;
 
-    /**
-     * @var string|null
-     */
-    private $column;
+    private ?string $column = null;
 
-    /**
-     * @var string|null
-     */
-    private $direction;
+    private ?string $direction = null;
 
-    /**
-     * @var string|null
-     */
-    private $page;
+    private ?int $page = null;
 
-    /**
-     * @var string|null
-     */
-    private $search;
+    private ?string $search = null;
 
-    /**
-     * @var string|null
-     */
-    private $before;
+    private ?string $before = null;
 
-    /**
-     * @var string|null
-     */
-    private $after;
+    private ?string $after = null;
 
-    public function __construct()
+    public static function fromArray(array $data): static
     {
-        $this->perPage = 100;
+        return self::createFromArray($data);
     }
 
-    /**
-     * @param int $perPage
-     * @return All
-     */
-    public function setPerPage(int $perPage): All
+    public function setPerPage(int $perPage): static
     {
         $this->perPage = $perPage;
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getPerPage(): int
     {
         return $this->perPage;
     }
 
-    /**
-     * @param null|string $column
-     * @return All
-     */
-    public function setColumn(?string $column): All
+    public function setColumn(?string $column): static
     {
         $this->column = $column;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getColumn(): ?string
     {
         return $this->column;
     }
 
-    /**
-     * @param null|string $direction
-     * @return All
-     */
-    public function setDirection(?string $direction): All
+    public function setDirection(?string $direction): static
     {
         $this->direction = $direction;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getDirection(): ?string
     {
         return $this->direction;
     }
 
-    /**
-     * @param null|string $page
-     * @return All
-     */
-    public function setPage(?string $page): All
+    public function setPage(?int $page): static
     {
         $this->page = $page;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getPage(): ?string
+    public function getPage(): ?int
     {
         return $this->page;
     }
 
-    /**
-     * @param null|string $search
-     * @return All
-     */
-    public function setSearch(?string $search): All
+    public function setSearch(?string $search): static
     {
         $this->search = $search;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getSearch(): ?string
     {
         return $this->search;
     }
 
-    /**
-     * @param null|string $before
-     * @return All
-     */
-    public function setBefore(?string $before): All
+    public function setBefore(?string $before): static
     {
         $this->before = $before;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getBefore(): ?string
     {
         return $this->before;
     }
 
-    /**
-     * @param null|string $after
-     * @return All
-     */
-    public function setAfter(?string $after): All
+    public function setAfter(?string $after): static
     {
         $this->after = $after;
         return $this;
     }
 
-    /**
-     * @return null|string
-     */
     public function getAfter(): ?string
     {
         return $this->after;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function toQuery(): string
     {
-        return (new QueryParameterBuilder)
+        return (new QueryParameterBuilder())
             ->addRequiredParameter('per_page', $this->getPerPage())
             ->addOptionalParameter('page', $this->getPage())
             ->addOptionalParameter('search', $this->getSearch())

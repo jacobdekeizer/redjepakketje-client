@@ -1,38 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\Support;
 
 class Str
 {
     /**
      * The cache of snake-cased words.
-     *
-     * @var array
      */
-    protected static $snakeCache = [];
+    protected static array $snakeCache = [];
 
     /**
      * The cache of studly-cased words.
-     *
-     * @var array
      */
-    protected static $studlyCache = [];
+    protected static array $studlyCache = [];
 
     /**
      * The cache of camel-cased words.
-     *
-     * @var array
      */
-    protected static $camelCache = [];
+    protected static array $camelCache = [];
 
     /**
      * Convert a string to snake case.
-     *
-     * @param  string  $value
-     * @param  string  $delimiter
-     * @return string
      */
-    public static function snake($value, $delimiter = '_')
+    public static function snake(string $value, string $delimiter = '_'): string
     {
         $key = $value;
 
@@ -43,7 +35,7 @@ class Str
         if (! ctype_lower($value)) {
             $value = preg_replace('/\s+/u', '', ucwords($value));
 
-            $value = static::lower(preg_replace('/(.)(?=[A-Z])/u', '$1'.$delimiter, $value));
+            $value = static::lower(preg_replace('/(.)(?=[A-Z])/u', '$1' . $delimiter, $value));
         }
 
         return static::$snakeCache[$key][$delimiter] = $value;
@@ -51,11 +43,8 @@ class Str
 
     /**
      * Convert the given string to lower-case.
-     *
-     * @param  string  $value
-     * @return string
      */
-    public static function lower($value)
+    public static function lower(string $value): string
     {
         return mb_strtolower($value, 'UTF-8');
     }
@@ -63,11 +52,8 @@ class Str
 
     /**
      * Convert a value to studly caps case.
-     *
-     * @param  string  $value
-     * @return string
      */
-    public static function studly(string $value)
+    public static function studly(string $value): string
     {
         $key = $value;
 
@@ -82,11 +68,8 @@ class Str
 
     /**
      * Convert a value to camel case.
-     *
-     * @param  string  $value
-     * @return string
      */
-    public static function camel($value)
+    public static function camel(string $value): string
     {
         if (isset(static::$camelCache[$value])) {
             return static::$camelCache[$value];

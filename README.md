@@ -200,14 +200,6 @@ $cutOffTime = $client->cutOffTimes()->get('1102AB');
 
 ## Code sniffer
 
-#### Unix
+Check: `composer phpcs`
 
-Check: `./vendor/bin/phpcs --standard=PSR2 ./src`
-
-Autofix: `./vendor/bin/phpcbf --standard=PSR2 ./src`
-
-#### Windows
-
-Check: `.\vendor\bin\phpcs --standard=PSR2 ./src`
-
-Autofix: `.\vendor\bin\phpcbf --standard=PSR2 ./src`
+Autofix: `composer phpcbf`
