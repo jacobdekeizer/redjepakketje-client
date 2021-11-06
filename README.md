@@ -29,180 +29,187 @@ $client->setApiKey('api_key');
 
 ## Shipments
 
-### Create shipment
-
-```php
-$shipment = (new \JacobDeKeizer\RedJePakketje\Resources\Shipment())
-    ->setCompanyName('Boeren BV')
-    ->setName('Gijs Boersma')
-    ->setStreet('Lange laan')
-    ->setHouseNumber(29)
-    ->setHouseNumberExtension('a')
-    ->setZipcode('9281EM')
-    ->setCity('Zevenaar')
-    ->setTelephone('0602938172')
-    ->setEmail('noreply@example.com')
-    ->setNote('Some note')
-    ->setDeliveryDate(date('Y-m-d'))
-    ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\Shipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
-    ->setReference('reference')
-    ->setNote('my_note')
-    ->setPickUpPoint('pick_up_point_uuid');
-
-$shipmentResponse = $client->shipments()->create(
-    $shipment,
-    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\Create() // optional
-);
-
-$label = $shipmentResponse->getLabel();
-```
-
-### Adding product options to a shipment
-```php
-$shipment->setProductOptions([
-    (new ProductOption())->setOption(ProductOption::OPTION_ALLOW_NEIGHBOURS)->setValue(true),
-    (new ProductOption())->setOption(ProductOption::OPTION_REQUIRE_SIGNATURE)->setValue(false),
-    (new ProductOption())->setOption(ProductOption::OPTION_AGE_CHECK_18)->setValue(false),
-    (new ProductOption())->setOption(ProductOption::OPTION_PERISHABLE)->setValue(true)->setMaxAttempts(2),
-]);
-```
-
 ### List shipments
 
 ```php
-$shipmentsList = $client->shipments()->all(
-    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\All() // optional
-);
+// todo document
 ```
 
 ### Get shipment
 
 ```php
-$shipmentResponse = $client->shipments()->get(
-    'your_tracking_code',
-    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel() // optional
-);
+// todo document
+```
 
-// for example check the shipment status
-$isPreTransit = $shipmentResponse->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ShipmentStatus::STATUS_PRE_TRANSIT);
+### Update shipment
+
+```php
+// todo document
+```
+
+### Create shipment
+
+```php
+// todo document
 ```
 
 ### Cancel shipment
 
 ```php
-$shipmentResponse = $client->shipments()->cancel('your_tracking_code');
+// todo document
 ```
 
-### Get label
+### Get label of a shipment
 
 ```php
-$labelContents = $client->shipments()->getLabel(
-    'your_tracking_code',
-    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel() // optional
-);
+// todo document
 ```
 
-### Create return shipments
-
-```php
-$returnShipment = (new \JacobDeKeizer\RedJePakketje\Resources\ReturnShipment())
-    ->setName('Gijs Boersma')
-    ->setStreet('Lange laan')
-    ->setHouseNumber(29)
-    ->setHouseNumberExtension('a')
-    ->setZipcode('9281EM')
-    ->setCity('Zevenaar')
-    ->setTelephone('0602938172')
-    ->setEmail('noreply@example.com')
-    ->setReference('Bestelling 112')
-    ->setNote('Some note')
-    ->setReceiverName('My company')
-    ->setPickUpPoint('pick_up_point_uuid')
-    ->setProduct(\JacobDeKeizer\RedJePakketje\Resources\ReturnShipment::PRODUCT_SAME_DAY_PARCEL_STANDARD)
-    ->setNote('some text');
-
-$returnShipmentResponse = $client->returnShipments()->create($returnShipment);
-```
+## Return shipments
 
 ### List return shipments
 
 ```php
-$returnShipmentsList = $client->returnShipments()->all(
-    new \JacobDeKeizer\RedJePakketje\Parameters\ReturnShipments\All() // optional
-);
+// todo document
 ```
 
 ### Get return shipment
 
 ```php
-$returnShipment = $client->returnShipments()->get('return_shipment_uuid');
-
-// for example check the return shipment status
-$isPreTransit = $returnShipment->isStatus(\JacobDeKeizer\RedJePakketje\Enums\ReturnShipmentStatus::STATUS_PRE_TRANSIT);
+// todo document
 ```
 
-### List pick up points
+### Create return shipment
 
 ```php
-$pickUpPoints = $client->pickUpPoints()->all();
+// todo document
 ```
 
-### Get pick up point
+### Cancel return shipment
 
 ```php
-$pickUpPoint = $client->pickUpPoints()->get('pick_up_point_uuid');
+// todo document
 ```
 
-### Create contact
+## Senders
+
+### List senders
 
 ```php
-$contact = (new \JacobDeKeizer\RedJePakketje\Resources\Contact())
-    ->setFirstName('John')
-    ->setLastName('Doe')
-    ->setEmail('john.doe@example.com')
-    ->setTelephone('+31612345678')
-    ->setGender(\JacobDeKeizer\RedJePakketje\Resources\Contact::GENDER_MALE)
-    ->setReference('reference');
-
-$contactResponse = $client->contacts()->create($contact);
+// todo document
 ```
 
-### List all contacts
+### Get sender
 
 ```php
-$contacts = $client->contacts()->all();
+// todo document
+```
+
+### Update sender
+
+```php
+// todo document
+```
+
+### Create sender
+
+```php
+// todo document
+```
+
+### Deactivate sender
+
+```php
+// todo document
+```
+
+## Pick-up Locations
+
+### List pick-up locations
+
+```php
+// todo document
+```
+
+### Get pick-up location
+
+```php
+// todo document
+```
+
+### Create pick-up location
+
+```php
+// todo document
+```
+
+### Update pick-up location
+
+```php
+// todo document
+```
+
+## Pick-up rules
+
+### List pick-up rules
+
+```php
+// todo document
+```
+
+### Get pick-up rule
+
+```php
+// todo document
+```
+
+### Create pick-up rule
+
+```php
+// todo document
+```
+
+### Update pick-up rule
+
+```php
+// todo document
+```
+
+### Delete pick-up rule
+
+```php
+// todo document
+```
+
+## Contacts
+
+### List contacts
+
+```php
+// todo document
 ```
 
 ### Get contact
 
 ```php
-$contact = $client->contacts()->get('contact_uuid');
+// todo document
+```
+
+### Create contact
+
+```php
+// todo document
 ```
 
 ### Update contact
 
 ```php
-$contact = (new \JacobDeKeizer\RedJePakketje\Resources\Contact())
-    ->setUuid('uuid_of_contact')
-    ->setFirstName('Jane')
-    ->setLastName('Doe')
-    ->setEmail('john.doe@example.com')
-    ->setTelephone('+31612345678')
-    ->setGender(\JacobDeKeizer\RedJePakketje\Resources\Contact::GENDER_FEMALE)
-    ->setReference('reference');
-
-$contactResponse = $client->contacts()->update($contact);
-```
-
-### Get cut off time
-
-```php
-$cutOffTime = $client->cutOffTimes()->get('1102AB');
+// todo document
 ```
 
 ## Exceptions
 
-You can catch the RedJePakketjeException and check if there is a response and response error
+You can catch the RedJePakketjeException and check if there is a response and response error or if it is a json error:
 
 ```php
 // example bad call
