@@ -27,6 +27,8 @@ $client = new \JacobDeKeizer\RedJePakketje\Client();
 $client->setApiKey('api_key');
 ```
 
+## Shipments
+
 ### Create shipment
 
 ```php
@@ -197,6 +199,34 @@ $contactResponse = $client->contacts()->update($contact);
 ```php
 $cutOffTime = $client->cutOffTimes()->get('1102AB');
 ```
+
+## Exceptions
+
+You can catch the RedJePakketjeException and check if there is a response and response error
+
+```php
+// example bad call
+try {
+    $shipmentResponse = $client->shipments()->create(
+        (new \JacobDeKeizer\RedJePakketje\Models\Shipment\CreateShipment()),
+    );
+} catch (\JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException $exception) {
+    if ($exception->hasResponse()) {
+        var_dump($exception->getResponse());
+    }
+
+    if ($exception->hasResponseError()) {
+        var_dump($exception->getResponseError()->getErrorCode());
+        var_dump($exception->getResponseError()->getErrorMessage());
+        var_dump($exception->getResponseError()->getErrorDetails());
+    }
+
+    if ($exception->isJsonError()) {
+        var_dump($exception->getPrevious());
+    }
+}
+```
+
 
 ## Code sniffer
 

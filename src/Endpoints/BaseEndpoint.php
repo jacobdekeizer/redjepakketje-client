@@ -40,7 +40,7 @@ abstract class BaseEndpoint
         try {
             $httpBody = $httpBody !== null ? json_encode($httpBody, JSON_THROW_ON_ERROR) : null;
         } catch (JsonException $jsonException) {
-            throw RedJePakketjeException::fromPrevious('Could not encode json data.', $jsonException);
+            throw RedJePakketjeException::fromJsonException($jsonException);
         }
 
         $response = $this->doRawRequest($httpMethod, $url, $httpBody, $requestHeaders);
@@ -53,8 +53,12 @@ abstract class BaseEndpoint
             try {
                 $data = json_decode($body, true, 512, JSON_THROW_ON_ERROR | JSON_OBJECT_AS_ARRAY);
             } catch (JsonException $jsonException) {
-                throw RedJePakketjeException::fromPrevious('Unable to decode api response: ' . $body, $jsonException);
+                throw RedJePakketjeException::fromJsonException($jsonException, $response);
             }
+        }
+
+        if ($response->getStatusCode() >= 400) {
+            throw RedJePakketjeException::fromJsonResponse($response, $data);
         }
 
         return $data;
@@ -83,15 +87,7 @@ abstract class BaseEndpoint
         try {
             $response = $this->client->getHttpClient()->send($request, ['http_errors' => false]);
         } catch (GuzzleException $e) {
-            throw RedJePakketjeException::fromPrevious('Error connecting to api: ' . $e->getMessage(), $e);
-        }
-
-        if ($response->getStatusCode() >= 400) {
-            throw new RedJePakketjeException(
-                'Error executing api call: ' . ($data['error_message'] ?? '-')
-                . ', StatusCode: ' . $response->getStatusCode(),
-                $response->getStatusCode()
-            );
+            throw new RedJePakketjeException('Error connecting to api: ' . $e->getMessage(), $e->getCode(), $e);
         }
 
         return $response;
