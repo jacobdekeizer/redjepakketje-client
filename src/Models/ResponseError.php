@@ -10,7 +10,7 @@ class ResponseError extends BaseModel
 
     private string $errorMessage;
 
-    private array $errorDetails;
+    private ?array $errorDetails;
 
     public function getErrorCode(): int
     {
@@ -34,12 +34,12 @@ class ResponseError extends BaseModel
         return $this;
     }
 
-    public function getErrorDetails(): array
+    public function getErrorDetails(): ?array
     {
         return $this->errorDetails;
     }
 
-    public function setErrorDetails(array $errorDetails): ResponseError
+    public function setErrorDetails(?array $errorDetails): ResponseError
     {
         $this->errorDetails = $errorDetails;
         return $this;
