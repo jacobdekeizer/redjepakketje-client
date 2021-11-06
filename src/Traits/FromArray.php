@@ -83,6 +83,7 @@ trait FromArray
         }
 
         return match ($name) {
+            'array' => self::convertValueFromType($type, $value, static fn($value): array => (array) $value),
             'bool' => self::convertValueFromType($type, $value, static fn($value): bool => (bool) $value),
             'string' => self::convertValueFromType($type, $value, static fn($value): string => (string) $value),
             'int' => self::convertValueFromType($type, $value, static fn($value): int => (int) $value),
