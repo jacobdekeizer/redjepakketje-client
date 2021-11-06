@@ -15,7 +15,7 @@ use ReflectionType;
 
 trait FromArray
 {
-    public static function createFromArray(array $data): static
+    protected static function createFromArray(array $data): static
     {
         $instance = new static();
 
