@@ -71,7 +71,8 @@ abstract class BaseEndpoint
         string $httpMethod,
         string $url,
         ?string $httpBody = null,
-        array $requestHeaders = []
+        array $requestHeaders = [],
+        bool $validate = false,
     ): ResponseInterface {
         $requestHeaders = array_merge($requestHeaders, [
             'Authorization' => ['Basic ' . $this->client->getEncodedApiKey()],
@@ -88,6 +89,10 @@ abstract class BaseEndpoint
             $response = $this->client->getHttpClient()->send($request, ['http_errors' => false]);
         } catch (GuzzleException $e) {
             throw new RedJePakketjeException('Error connecting to api: ' . $e->getMessage(), $e->getCode(), $e);
+        }
+
+        if ($validate && $response->getStatusCode() >= 400) {
+            throw RedJePakketjeException::fromResponse($response);
         }
 
         return $response;

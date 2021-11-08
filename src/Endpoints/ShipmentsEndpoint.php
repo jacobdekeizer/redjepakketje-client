@@ -108,6 +108,8 @@ class ShipmentsEndpoint extends BaseEndpoint
         $apiRoute = $this->client::BASE_ENDPOINT . '/' . self::ENDPOINT
             . '/' . $trackingCode . '/label' . $parameter->toQuery();
 
-        return $this->doRawRequest(self::GET, $apiRoute)->getBody()->getContents();
+        $response = $this->doRawRequest(self::GET, $apiRoute, validate: true);
+
+        return $response->getBody()->getContents();
     }
 }

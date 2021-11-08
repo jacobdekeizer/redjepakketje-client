@@ -24,8 +24,6 @@ class CreatePickUpLocation extends BaseModel implements ToRequest
 
     private string $city;
 
-    private ?string $country;
-
     /**
      * @var int[]
      */
@@ -99,17 +97,6 @@ class CreatePickUpLocation extends BaseModel implements ToRequest
     public function setCity(string $city): static
     {
         $this->city = $city;
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(?string $country): static
-    {
-        $this->country = $country;
         return $this;
     }
 

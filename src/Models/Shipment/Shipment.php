@@ -46,6 +46,8 @@ class Shipment extends BaseModel
 
     private string $labelZplUrl;
 
+    private ?string $label;
+
     private string $status;
 
     private string $expectedDeliveryDate;
@@ -281,6 +283,17 @@ class Shipment extends BaseModel
     public function setLabelZplUrl(string $labelZplUrl): static
     {
         $this->labelZplUrl = $labelZplUrl;
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): static
+    {
+        $this->label = $label;
         return $this;
     }
 

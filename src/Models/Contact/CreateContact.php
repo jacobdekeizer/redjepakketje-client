@@ -29,9 +29,10 @@ class CreateContact extends BaseModel implements ToRequest
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): void
+    public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
+        return $this;
     }
 
     public function getLastName(): string
@@ -61,9 +62,10 @@ class CreateContact extends BaseModel implements ToRequest
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): void
+    public function setTelephone(?string $telephone): static
     {
         $this->telephone = $telephone;
+        return $this;
     }
 
     public function getEmail(): ?string

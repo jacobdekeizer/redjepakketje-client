@@ -1,8 +1,9 @@
 # Red je Pakketje api client
 
 [![Packagist Version](https://img.shields.io/packagist/v/jacobdekeizer/redjepakketje-client)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
-[![Packagist](https://img.shields.io/packagist/l/jacobdekeizer/redjepakketje-client?color=brightgreen)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
-[![Packagist](https://img.shields.io/packagist/dt/jacobdekeizer/redjepakketje-client?color=brightgreen)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![Packagist](https://img.shields.io/packagist/l/jacobdekeizer/redjepakketje-client)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![Packagist](https://img.shields.io/packagist/dt/jacobdekeizer/redjepakketje-client)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
+[![Packagist](https://img.shields.io/packagist/php-v/jacobdekeizer/redjepakketje-client)](https://packagist.org/packages/jacobdekeizer/redjepakketje-client)
 ![Build](https://github.com/jacobdekeizer/redjepakketje-client/workflows/Build/badge.svg?branch=master)
 
 [Red je Pakketje API documentation](https://redjepakketje.docs.apiary.io)
@@ -32,37 +33,97 @@ $client->setApiKey('api_key');
 ### List shipments
 
 ```php
-// todo document
+$shipmentsList = $client->shipments()->all(
+    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\All() // optional
+);
+```
+
+### List recently created shipments
+
+Retrieves shipments from the last 7 days.
+
+```php
+$shipmentsList = $client->shipments()->allRecentlyCreated();
 ```
 
 ### Get shipment
 
 ```php
-// todo document
-```
+$shipment = $client->shipments()->get('tracking_code');
 
-### Update shipment
-
-```php
-// todo document
+// for example check the shipment status
+$isDelivered = $shipment->getStatus() === \JacobDeKeizer\RedJePakketje\Models\Shipment\Enums\ShipmentStatus::DELIVERED;
 ```
 
 ### Create shipment
 
 ```php
-// todo document
+$shipment = (new \JacobDeKeizer\RedJePakketje\Models\Shipment\CreateShipment())
+    ->setCompanyName('Boeren BV')
+    ->setName('Gijs Boersma')
+    ->setStreet('Lange laan')
+    ->setHouseNumber(29)
+    ->setHouseNumberExtension('a')
+    ->setZipcode('9281EM')
+    ->setCity('Zevenaar')
+    ->setTelephone('0602938172')
+    ->setEmail('noreply@example.com')
+    ->setNote('Some note')
+    ->setDeliveryDate(date('Y-m-d'))
+    ->setProduct(\JacobDeKeizer\RedJePakketje\Models\Shipment\Enums\ShipmentProduct::SAME_DAY_PARCEL_STANDARD)
+    ->setReference('reference')
+    ->setNote('my_note')
+    ->setSender('sender_uuid');
+    
+// optionally set product options
+$shipment->setProductOptions(
+    (new \JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption())
+        ->setOption(\JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption::OPTION_ALLOW_NEIGHBOURS)
+        ->setValue(true),
+    (new \JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption())
+        ->setOption(\JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption::OPTION_REQUIRE_SIGNATURE)
+        ->setValue(false),
+    (new \JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption())
+        ->setOption(\JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption::OPTION_AGE_CHECK_18)
+        ->setValue(false),
+    (new \JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption())
+        ->setOption(\JacobDeKeizer\RedJePakketje\Models\Shipment\ProductOption::OPTION_ALLOW_NEIGHBOURS)
+        ->setValue(true)
+        ->setMaxAttempts(2)
+);
+
+$shipmentResponse = $client->shipments()->create(
+    $shipment,
+    new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\Create() // optional
+);
+
+$label = $shipmentResponse->getLabel();
+```
+
+### Update shipment
+
+```php
+
+$shipment = $client->shipments()->update(
+    'tracking_code',
+    (new \JacobDeKeizer\RedJePakketje\Models\Shipment\UpdateShipment())
+        ->setProduct(\JacobDeKeizer\RedJePakketje\Models\Shipment\Enums\ShipmentProduct::NEXT_DAY_PARCEL_LARGE)
+);
 ```
 
 ### Cancel shipment
 
 ```php
-// todo document
+$shipment = $client->shipments()->cancel('tracking_code');
 ```
 
 ### Get label of a shipment
 
 ```php
-// todo document
+$label = $client->shipments()->getLabel(
+    'tracking_code',
+    (new \JacobDeKeizer\RedJePakketje\Parameters\Shipments\GetLabel()) // optional
+);
 ```
 
 ## Return shipments
@@ -70,25 +131,43 @@ $client->setApiKey('api_key');
 ### List return shipments
 
 ```php
-// todo document
+$returnShipmentsList = $client->returnShipments()->all(
+    new \JacobDeKeizer\RedJePakketje\Parameters\ReturnShipments\All() // optional
+);
 ```
 
 ### Get return shipment
 
 ```php
-// todo document
+$returnShipment = $client->returnShipments()->get('return_shipment_uuid');
 ```
 
 ### Create return shipment
 
 ```php
-// todo document
+$returnShipment = (new \JacobDeKeizer\RedJePakketje\Models\ReturnShipment\CreateReturnShipment())
+    ->setName('Gijs Boersma')
+    ->setStreet('Lange laan')
+    ->setHouseNumber(29)
+    ->setHouseNumberExtension('a')
+    ->setZipcode('9281EM')
+    ->setCity('Zevenaar')
+    ->setTelephone('0602938172')
+    ->setEmail('noreply@example.com')
+    ->setReference('Bestelling 123')
+    ->setNote('Some note')
+    ->setReceiverName('My company')
+    ->setProduct(\JacobDeKeizer\RedJePakketje\Models\ReturnShipment\Enums\ReturnShipmentProduct::SAME_DAY_PARCEL_MEDIUM)
+    ->setNote('some text')
+    ->setSender('sender_uuid');
+
+$returnShipmentResponse = $client->returnShipments()->create($returnShipment);
 ```
 
 ### Cancel return shipment
 
 ```php
-// todo document
+$returnShipment = $client->returnShipments()->cancel('return_shipment_uuid');
 ```
 
 ## Senders
@@ -96,31 +175,53 @@ $client->setApiKey('api_key');
 ### List senders
 
 ```php
-// todo document
+$senderList = $client->senders()->all();
 ```
 
 ### Get sender
 
 ```php
-// todo document
+$sender = $client->senders()->get('sender_uuid');
 ```
 
 ### Update sender
 
 ```php
-// todo document
+$sender = $client->senders()->update(
+    'sender_uuid',
+    (new \JacobDeKeizer\RedJePakketje\Models\Sender\UpdateSender())
+        ->setName('My Webshop 123')
+        ->setTelephone('+31612345678')
+        ->setStreet('Streetname')
+        ->setHouseNumber('11')
+        ->setZipcode('8327SD')
+        ->setCity('Breda')
+);
 ```
 
 ### Create sender
 
 ```php
-// todo document
+$sender = $client->senders()->create(
+    (new \JacobDeKeizer\RedJePakketje\Models\Sender\CreateSender())
+        ->setReference('A1234567890Q')
+        ->setName('My Webshop')
+        ->setTelephone('+31612345678')
+        ->setStreet('Streetname')
+        ->setHouseNumber('11')
+        ->setZipcode('8327SD')
+        ->setCity('Breda')
+);
 ```
 
 ### Deactivate sender
 
 ```php
-// todo document
+$client->senders()->deactivate(
+    'sender_uuid',
+    (new \JacobDeKeizer\RedJePakketje\Models\Sender\DeactivateSender())
+        ->setInactiveFrom(date('Y-m-d', strtotime('+1 day')))
+);
 ```
 
 ## Pick-up Locations
@@ -128,25 +229,41 @@ $client->setApiKey('api_key');
 ### List pick-up locations
 
 ```php
-// todo document
+$pickUpLocationsList = $client->pickUpLocations()->all(
+    new JacobDeKeizer\RedJePakketje\Parameters\PickUpLocation\All() // optional
+);
 ```
 
 ### Get pick-up location
 
 ```php
-// todo document
+$pickUpLocation = $client->pickUpLocations()->get('pick_up_location_uuid');
 ```
 
 ### Create pick-up location
 
 ```php
-// todo document
+$pickUpLocation = $client->pickUpLocations()->create(
+    (new JacobDeKeizer\RedJePakketje\Models\PickUpLocation\CreatePickUpLocation())
+        ->setName('Warehouse')
+        ->setStreet('Streetname')
+        ->setHouseNumber('11')
+        ->setHouseNumberExtension('a')
+        ->setZipcode('8327SD')
+        ->setCity('Breda')
+        ->setAvailableDays([1, 2, 3, 4, 5])
+        ->setTypes([\JacobDeKeizer\RedJePakketje\Models\PickUpLocation\Enums\PickUpLocationType::PICK_UP_POINT])
+);
 ```
 
 ### Update pick-up location
 
 ```php
-// todo document
+$pickUpLocation = $client->pickUpLocations()->update(
+    'pick_up_location_uuid',
+    (new \JacobDeKeizer\RedJePakketje\Models\PickUpLocation\UpdatePickUpLocation())
+        ->setAvailableDays([1, 2, 3, 4, 5, 6, 7])
+);
 ```
 
 ## Pick-up rules
@@ -154,31 +271,39 @@ $client->setApiKey('api_key');
 ### List pick-up rules
 
 ```php
-// todo document
-```
-
-### Get pick-up rule
-
-```php
-// todo document
+$pickUpRulesList = $client->pickUpRules()->all('sender_uuid');
 ```
 
 ### Create pick-up rule
 
 ```php
-// todo document
+$pickUpRule = $client->pickUpRules()->create(
+        'sender_uuid',
+        (new \JacobDeKeizer\RedJePakketje\Models\PickUpRule\CreatePickUpRule())
+            ->setPickUpLocation('pick_up_location_uuid')
+            ->setStartDate(date('Y-m-d'))
+    );
 ```
 
 ### Update pick-up rule
 
 ```php
-// todo document
+$pickUpRule = $client->pickUpRules()->update(
+    'sender_uuid',
+    'pick_up_rule_uuid',
+    (new \JacobDeKeizer\RedJePakketje\Models\PickUpRule\UpdatePickUpRule())
+        ->setStartDate(date('Y-m-d', strtotime('+1 day')))
+);
 ```
 
 ### Delete pick-up rule
 
 ```php
-// todo document
+
+$client->pickUpRules()->delete(
+    'sender_uuid',
+    'pick_up_rule_uuid'
+);
 ```
 
 ## Contacts
@@ -186,25 +311,42 @@ $client->setApiKey('api_key');
 ### List contacts
 
 ```php
-// todo document
+$contactsList = $client->contacts()->all();
 ```
 
 ### Get contact
 
 ```php
-// todo document
+$contact = $client->contacts()->get('contact_uuid');
 ```
 
 ### Create contact
 
 ```php
-// todo document
+$contact = $client->contacts()->create(
+    (new \JacobDeKeizer\RedJePakketje\Models\Contact\CreateContact())
+        ->setFirstName('John')
+        ->setLastName('Doe')
+        ->setEmail('john.doe@example.com')
+        ->setTelephone('+31612345678')
+        ->setGender(\JacobDeKeizer\RedJePakketje\Models\Contact\Enums\Gender::MALE)
+        ->setReference('reference')
+);
 ```
 
 ### Update contact
 
 ```php
-// todo document
+$contact = $client->contacts()->update(
+    'contact_uuid',
+    (new \JacobDeKeizer\RedJePakketje\Models\Contact\UpdateContact())
+        ->setFirstName('Jane')
+        ->setLastName('Doe')
+        ->setEmail('jane.doe@example.com')
+        ->setTelephone('+31612345678')
+        ->setGender(\JacobDeKeizer\RedJePakketje\Models\Contact\Enums\Gender::FEMALE)
+        ->setReference('reference')
+);
 ```
 
 ## Exceptions
@@ -233,7 +375,6 @@ try {
     }
 }
 ```
-
 
 ## Code sniffer
 

@@ -56,6 +56,18 @@ class RedJePakketjeException extends Exception
         );
     }
 
+    public static function fromResponse(ResponseInterface $response): self
+    {
+        $code = $response->getStatusCode();
+
+        return new RedJePakketjeException(
+            message: 'Error response from Red je Pakketje api with StatusCode: ' . $code,
+            code: $response->getStatusCode(),
+            previous: null,
+            response: $response,
+        );
+    }
+
     public function isJsonError(): bool
     {
         return $this->code === self::JSON_ERROR_CODE;

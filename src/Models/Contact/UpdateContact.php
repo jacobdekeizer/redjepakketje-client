@@ -62,9 +62,10 @@ class UpdateContact extends BaseModel implements ToRequest
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): void
+    public function setTelephone(?string $telephone): static
     {
         $this->telephone = $telephone;
+        return $this;
     }
 
     public function getEmail(): ?string

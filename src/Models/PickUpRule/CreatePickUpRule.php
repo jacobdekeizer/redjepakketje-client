@@ -12,22 +12,9 @@ class CreatePickUpRule extends BaseModel implements ToRequest
 {
     use Traits\ToRequest;
 
-    private string $senderUuid;
-
     private string $startDate;
 
     private string $pickUpLocation;
-
-    public function getSenderUuid(): string
-    {
-        return $this->senderUuid;
-    }
-
-    public function setSenderUuid(string $senderUuid): static
-    {
-        $this->senderUuid = $senderUuid;
-        return $this;
-    }
 
     public function getStartDate(): string
     {

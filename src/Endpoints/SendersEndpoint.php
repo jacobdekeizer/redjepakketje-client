@@ -6,6 +6,7 @@ namespace JacobDeKeizer\RedJePakketje\Endpoints;
 
 use JacobDeKeizer\RedJePakketje\Exceptions\RedJePakketjeException;
 use JacobDeKeizer\RedJePakketje\Models\Sender\CreateSender;
+use JacobDeKeizer\RedJePakketje\Models\Sender\DeactivateSender;
 use JacobDeKeizer\RedJePakketje\Models\Sender\Sender;
 use JacobDeKeizer\RedJePakketje\Models\Sender\SenderList;
 use JacobDeKeizer\RedJePakketje\Models\Sender\UpdateSender;
@@ -49,9 +50,11 @@ class SendersEndpoint extends BaseEndpoint
     /**
      * @throws RedJePakketjeException
      */
-    public function update(UpdateSender $sender): Sender
+    public function update(string $uuid, UpdateSender $sender): Sender
     {
-        $response = $this->doRequest(self::PATCH, self::ENDPOINT, $sender->toRequest());
+        $apiRoute = self::ENDPOINT . '/' . $uuid;
+
+        $response = $this->doRequest(self::PATCH, $apiRoute, $sender->toRequest());
 
         return Sender::fromArray($response['data'] ?? []);
     }
@@ -59,10 +62,10 @@ class SendersEndpoint extends BaseEndpoint
     /**
      * @throws RedJePakketjeException
      */
-    public function deactivate(string $uuid): void
+    public function deactivate(string $uuid, DeactivateSender $sender): void
     {
         $apiRoute = self::ENDPOINT . '/' . $uuid;
 
-        $this->doRequest(self::DELETE, $apiRoute);
+        $this->doRequest(self::DELETE, $apiRoute, $sender->toRequest());
     }
 }
