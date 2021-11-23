@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\Traits;
 
 use JacobDeKeizer\RedJePakketje\Support\Str;
 
 trait ToRequest
 {
-    /**
-     * @return array
-     */
     public function toRequest(): array
     {
         $data = [];
@@ -22,9 +21,17 @@ trait ToRequest
                 continue;
             }
 
-            $value = $this->covertToData($snakeKey, $value);
+            $value = $this->covertToRequestData($snakeKey, $value);
 
-            if ($value instanceof ToRequest) {
+            if (is_array($value)) {
+                $value = array_map(static function (mixed $val): mixed {
+                    if ($val instanceof ToRequest) {
+                        return $val->toRequest();
+                    }
+
+                    return $val;
+                }, $value);
+            } elseif ($value instanceof ToRequest) {
                 $value = $value->toRequest();
             }
 
@@ -34,21 +41,12 @@ trait ToRequest
         return $data;
     }
 
-    /**
-     * @param string $key
-     * @return bool
-     */
     protected function removeFromRequestData(string $key): bool
     {
         return false;
     }
 
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return mixed
-     */
-    protected function covertToData(string $key, $value)
+    protected function covertToRequestData(string $key, mixed $value): mixed
     {
         return $value;
     }

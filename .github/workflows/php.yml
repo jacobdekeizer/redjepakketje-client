@@ -3,6 +3,14 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 8.0 ]
+        stability: [ prefer-lowest, prefer-stable ]
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2
@@ -16,4 +24,4 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Code sniffer 🔎
-        run: ./vendor/bin/phpcs --standard=PSR2 ./src
+        run: composer phpcs

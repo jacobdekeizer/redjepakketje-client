@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\QueryParameters;
 
 class QueryParameterRequired extends QueryParameterOptional
 {
-    /**
-     * {@inheritDoc}
-     */
     public function toQueryString(): ?string
     {
-        return $this->getParameter() . '=' . $this->getValue();
+        return $this->getParameter() . '=' . urlencode($this->getValue());
     }
 }

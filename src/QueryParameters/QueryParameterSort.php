@@ -1,31 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\QueryParameters;
 
 use JacobDeKeizer\RedJePakketje\Contracts\QueryParameter;
 
 class QueryParameterSort implements QueryParameter
 {
-    /**
-     * @var string
-     */
-    private $parameter;
+    private string $parameter;
 
-    /**
-     * @var string|null
-     */
-    private $column;
+    private ?string $column;
 
-    /**
-     * @var string|null
-     */
-    private $direction;
+    private ?string $direction;
 
-    /**
-     * @param string $parameter
-     * @param string|null $column
-     * @param string|null $direction
-     */
     public function __construct(string $parameter, ?string $column, ?string $direction = null)
     {
         $this->parameter = $parameter;
@@ -33,33 +21,21 @@ class QueryParameterSort implements QueryParameter
         $this->direction = $direction;
     }
 
-    /**
-     * @return string
-     */
     public function getParameter(): string
     {
         return $this->parameter;
     }
 
-    /**
-     * @return string|null
-     */
     public function getColumn(): ?string
     {
         return $this->column;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDirection(): ?string
     {
         return $this->direction;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function toQueryString(): ?string
     {
         if ($this->getColumn() === null) {

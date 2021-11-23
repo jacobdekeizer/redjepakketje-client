@@ -1,190 +1,109 @@
 <?php
 
+declare(strict_types=1);
+
 namespace JacobDeKeizer\RedJePakketje\Parameters\Shipments;
 
-use JacobDeKeizer\RedJePakketje\Contracts\Dto;
-use JacobDeKeizer\RedJePakketje\Contracts\HasLabelFormat;
-use JacobDeKeizer\RedJePakketje\Contracts\Parameter;
+use JacobDeKeizer\RedJePakketje\Models\Shipment\Enums\LabelFormat;
+use JacobDeKeizer\RedJePakketje\Parameters\BaseParameter;
 use JacobDeKeizer\RedJePakketje\QueryParameters\QueryParameterBuilder;
-use JacobDeKeizer\RedJePakketje\Traits\FromArray;
 
-class Create implements Dto, Parameter, HasLabelFormat
+class Create extends BaseParameter
 {
-    use FromArray;
+    private string $label = LabelFormat::TYPE_PDF;
 
-    /**
-     * @var string
-     */
-    private $label;
+    private string $pagesize = LabelFormat::SIZE_A6;
 
-    /**
-     * @var string
-     */
-    private $pagesize;
+    private ?int $offsetX = null;
 
-    /**
-     * @var int|null
-     */
-    private $offsetX;
+    private ?int $offsetY = null;
 
-    /**
-     * @var int|null
-     */
-    private $offsetY;
+    private ?int $dpi = null;
 
-    /**
-     * @var int|null
-     */
-    private $dpi;
+    private ?bool $embedded = null;
 
-    /**
-     * @var boolean|null
-     */
-    private $embedded;
+    private ?bool $inverted = null;
 
-    /**
-     * @var boolean|null
-     */
-    private $inverted;
-
-    public function __construct()
-    {
-        $this->label = self::LABEL_TYPE_PDF;
-        $this->pagesize = self::LABEL_SIZE_A6;
-    }
-
-    /**
-     * @param string $label
-     * @return Create
-     */
-    public function setLabel(string $label): Create
+    public function setLabel(string $label): static
     {
         $this->label = $label;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLabel(): string
     {
         return $this->label;
     }
 
-    /**
-     * @param string $pagesize
-     * @return Create
-     */
-    public function setPagesize(string $pagesize): Create
+    public function setPagesize(string $pagesize): static
     {
         $this->pagesize = $pagesize;
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPagesize(): string
     {
         return $this->pagesize;
     }
 
-    /**
-     * @param int|null $offsetX
-     * @return Create
-     */
-    public function setOffsetX(?int $offsetX): Create
+    public function setOffsetX(?int $offsetX): static
     {
         $this->offsetX = $offsetX;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getOffsetX(): ?int
     {
         return $this->offsetX;
     }
 
-    /**
-     * @param int|null $offsetY
-     * @return Create
-     */
-    public function setOffsetY(?int $offsetY): Create
+    public function setOffsetY(?int $offsetY): static
     {
         $this->offsetY = $offsetY;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getOffsetY(): ?int
     {
         return $this->offsetY;
     }
 
-    /**
-     * @param int|null $dpi
-     * @return Create
-     */
-    public function setDpi(?int $dpi): Create
+    public function setDpi(?int $dpi): static
     {
         $this->dpi = $dpi;
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getDpi(): ?int
     {
         return $this->dpi;
     }
 
-    /**
-     * @param bool|null $embedded
-     * @return Create
-     */
-    public function setEmbedded(?bool $embedded): Create
+    public function setEmbedded(?bool $embedded): static
     {
         $this->embedded = $embedded;
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getEmbedded(): ?bool
     {
         return $this->embedded;
     }
 
-    /**
-     * @param bool|null $inverted
-     * @return Create
-     */
-    public function setInverted(?bool $inverted): Create
+    public function setInverted(?bool $inverted): static
     {
         $this->inverted = $inverted;
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getInverted(): ?bool
     {
         return $this->inverted;
     }
 
-    /**
-     * @return string
-     */
     public function toQuery(): string
     {
-        return (new QueryParameterBuilder)
+        return (new QueryParameterBuilder())
             ->addRequiredParameter('label', $this->getLabel())
             ->addRequiredParameter('pagesize', $this->getPagesize())
             ->addOptionalParameter('offset_x', $this->getOffsetX())
